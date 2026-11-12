@@ -1,173 +1,170 @@
+<?php
+require_once '../includes/auth.php';
+verificarSesion();
+requerirRol(['Administrador', 'Veterinario', 'Recepcionista']);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Panel Administrador - Agenda | B&amp;G Animal Care</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Citas | B&amp;G Animal Care</title>
 
+    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- Bootstrap CSS & Iconos -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/citas.css">
+    <link rel="icon" type="image/png" href="../../img/logo.png">
+
+    <!-- Estilos del Sidebar y del Calendario de Citas -->
+    <link href="../assets/sidebar.css" rel="stylesheet">
+    <link href="../../css/citas.css" rel="stylesheet">
+
+    <script>
+        if (localStorage.getItem('sidebar-colapsado') === 'true') {
+            document.documentElement.classList.add('colapsada');
+        }
+    </script>
 </head>
-<body data-modo="admin">
+<body data-modo="admin" data-api-url="../../api_citas.php">
+    <div class="layout">
+        <?php include '../includes/sidebar.php'; ?>
 
-    <div class="admin-wrapper">
-        <!-- ================= SIDEBAR IZQUIERDO ================= -->
-        <aside class="admin-sidebar">
-            <div class="sidebar-brand">
-                <div class="sidebar-brand-icon">
-                    <i class="fa-solid fa-paw"></i>
-                </div>
-                <div style="line-height:1.15;">
-                    <strong class="d-block fs-6">B&amp;G Animal Care</strong>
-                    <small class="text-white-50" style="font-size:0.75rem;">Gestión Clínica y Citas</small>
-                </div>
-            </div>
+        <main id="contenido">
+            <!-- Botón hamburguesa (solo celular) -->
+            <button id="botonMenuMovil" class="boton-menu-movil mb-3 d-lg-none" aria-label="Menú">
+                <i class="fa-solid fa-bars"></i>
+            </button>
 
-            <div class="sidebar-section-label">Menú Principal</div>
-            <ul class="sidebar-nav">
-                <li>
-                    <a href="admin_citas.html" class="sidebar-link active">
-                        <i class="bi bi-calendar-week"></i> Agenda de Citas
+            <!-- Encabezado del Módulo -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+                <div>
+                    <h1 class="h4 fw-bold mb-1" style="color: var(--vet-azul-oscuro);">
+                        <i class="fa-solid fa-calendar-check me-2 text-primary"></i>Agenda de Citas
+                    </h1>
+                    <p class="text-muted small mb-0">
+                        Haz clic en cualquier día del calendario para ver las citas registradas y enviar confirmación por WhatsApp.
+                    </p>
+                </div>
+
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                    <a href="../../citas.php" target="_blank" rel="noopener" class="btn btn-outline-primary rounded-pill px-3 fw-semibold">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> Vista Pública Cliente
                     </a>
-                </li>
-                <li>
-                    <a href="agendar_cita.html" target="_blank" class="sidebar-link">
-                        <i class="bi bi-box-arrow-up-right"></i> Vista Pública Cliente
-                    </a>
-                </li>
-                <li>
-                    <a href="index.html" class="sidebar-link">
-                        <i class="bi bi-globe"></i> Volver a Landing Page
-                    </a>
-                </li>
-            </ul>
-
-            <div class="sidebar-section-label mt-3">Resumen Rápido</div>
-            <div class="px-3">
-                <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.08); font-size:0.82rem;">
-                    <div class="d-flex justify-content-between mb-1">
-                        <span class="text-white-50">Total mes:</span>
-                        <strong id="statTotalMes">0</strong>
-                    </div>
-                    <div class="d-flex justify-content-between mb-1">
-                        <span class="text-white-50">Confirmadas:</span>
-                        <strong class="text-success" id="statConfirmadas">0</strong>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <span class="text-white-50">Pendientes:</span>
-                        <strong class="text-warning" id="statPendientes">0</strong>
-                    </div>
-                </div>
-            </div>
-        </aside>
-
-        <!-- ================= CONTENIDO PRINCIPAL ================= -->
-        <div class="admin-main">
-            <!-- Barra Superior -->
-            <div class="admin-topbar">
-                <div class="d-flex align-items-center gap-2 text-muted small">
-                    <span>B&amp;G Animal Care</span>
-                    <span>/</span>
-                    <strong class="text-dark">Agenda y Citas Veterinarias</strong>
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                    <span class="admin-badge-pill">
-                        <i class="bi bi-person-badge-fill text-primary"></i>
-                        Médico Veterinario (ADMINISTRADOR)
-                    </span>
-                    <a href="index.html" class="btn btn-sm btn-outline-danger rounded-pill fw-semibold px-3">
-                        Salir <i class="bi bi-box-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="container-fluid p-4">
-                <!-- Título de Sección + Botón Nueva Cita Manual -->
-                <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
-                    <div>
-                        <h1 class="h3 fw-bold mb-1" style="color: var(--vet-azul-oscuro);">Agenda de Citas</h1>
-                        <p class="text-muted small mb-0">
-                            Haz clic en cualquier cita o día del calendario para ver los datos del paciente y enviar confirmación por WhatsApp.
-                        </p>
-                    </div>
                     <button type="button" class="btn boton-vet" id="btnAdminNuevaCita">
                         <i class="bi bi-plus-lg"></i> Agendar nueva cita
                     </button>
                 </div>
+            </div>
 
-                <!-- ================= CALENDARIO MENSUAL ADMIN ================= -->
-                <div class="calendar-card mb-4">
-                    <div class="calendar-toolbar">
-                        <h2 class="calendar-month-title">
-                            <i class="bi bi-calendar3 text-primary"></i>
-                            <span id="nombreMesAnio">Noviembre 2026</span>
-                        </h2>
-                        <div class="d-flex align-items-center gap-2">
-                            <button type="button" class="btn-cal-nav" id="btnMesAnterior">← Mes Anterior</button>
-                            <button type="button" class="btn-cal-nav" id="btnHoy">Hoy</button>
-                            <button type="button" class="btn-cal-nav" id="btnMesSiguiente">Mes Siguiente →</button>
+            <!-- Resumen Rápido del Mes -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="bg-white rounded-4 p-3 border shadow-sm d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="text-muted small d-block">Total del mes</span>
+                            <strong class="fs-4" style="color: var(--vet-azul-oscuro);" id="statTotalMes">0</strong>
+                        </div>
+                        <div class="rounded-3 bg-primary-subtle text-primary d-grid" style="width:42px;height:42px;place-items:center;">
+                            <i class="bi bi-calendar3 fs-5"></i>
                         </div>
                     </div>
-
-                    <!-- Leyenda de ocupación -->
-                    <div class="leyenda-colores">
-                        <span class="leyenda-item"><span class="leyenda-dot" style="background:#ffffff;"></span> Libre (0%)</span>
-                        <span class="leyenda-item"><span class="leyenda-dot" style="background:#dcfce7;"></span> Baja ocupación</span>
-                        <span class="leyenda-item"><span class="leyenda-dot" style="background:#fef08a;"></span> Media ocupación</span>
-                        <span class="leyenda-item"><span class="leyenda-dot" style="background:#fed7aa;"></span> Alta ocupación</span>
-                        <span class="leyenda-item"><span class="leyenda-dot" style="background:#fecaca;"></span> Lleno (100%) / Martes Cerrado</span>
-                    </div>
-
-                    <div class="calendar-grid" id="calendarioGrid"></div>
                 </div>
-
-                <!-- ================= LISTA DETALLADA DE CITAS AGENDADAS ================= -->
-                <div class="calendar-card">
-                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
-                        <h3 class="h5 fw-bold mb-0" style="color: var(--vet-azul-oscuro);">
-                            Lista de citas agendadas <span id="etiquetaFiltroFecha" class="badge bg-primary-subtle text-primary ms-2"></span>
-                        </h3>
-                        <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill d-none" id="btnLimpiarFiltroFecha">
-                            Ver todas las del mes
-                        </button>
-                    </div>
-
-                    <!-- Filtros -->
-                    <div class="row g-2 p-3 bg-light rounded-3 border mb-3">
-                        <div class="col-md-4">
-                            <select class="form-select form-select-sm" id="filtroEstado">
-                                <option value="TODOS">-- Todos los estados --</option>
-                                <option value="Pendiente">Pendiente por confirmar</option>
-                                <option value="Confirmada">Confirmada</option>
-                                <option value="Cancelada">Cancelada</option>
-                            </select>
+                <div class="col-md-4">
+                    <div class="bg-white rounded-4 p-3 border shadow-sm d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="text-muted small d-block">Confirmadas</span>
+                            <strong class="fs-4 text-success" id="statConfirmadas">0</strong>
                         </div>
-                        <div class="col-md-4">
-                            <select class="form-select form-select-sm" id="filtroEspecie">
-                                <option value="TODAS">-- Todas las especies --</option>
-                                <option value="Perro">Perro</option>
-                                <option value="Gato">Gato</option>
-                                <option value="Conejo">Conejo</option>
-                                <option value="Ave">Ave</option>
-                                <option value="Otra">Otras especies</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="search" class="form-control form-control-sm" id="busquedaCita" placeholder="Buscar mascota, dueño o teléfono...">
+                        <div class="rounded-3 bg-success-subtle text-success d-grid" style="width:42px;height:42px;place-items:center;">
+                            <i class="bi bi-check2-circle fs-5"></i>
                         </div>
                     </div>
-
-                    <div id="listaCitasAdmin" class="d-flex flex-column gap-3"></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="bg-white rounded-4 p-3 border shadow-sm d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="text-muted small d-block">Pendientes</span>
+                            <strong class="fs-4 text-warning" id="statPendientes">0</strong>
+                        </div>
+                        <div class="rounded-3 bg-warning-subtle text-warning-emphasis d-grid" style="width:42px;height:42px;place-items:center;">
+                            <i class="bi bi-clock-history fs-5"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+
+            <!-- ================= CALENDARIO MENSUAL ADMIN ================= -->
+            <div class="calendar-card mb-4">
+                <div class="calendar-toolbar">
+                    <h2 class="calendar-month-title">
+                        <i class="bi bi-calendar3 text-primary"></i>
+                        <span id="nombreMesAnio">Noviembre 2026</span>
+                    </h2>
+                    <div class="d-flex align-items-center gap-2">
+                        <button type="button" class="btn-cal-nav" id="btnMesAnterior">← Mes Anterior</button>
+                        <button type="button" class="btn-cal-nav" id="btnHoy">Hoy</button>
+                        <button type="button" class="btn-cal-nav" id="btnMesSiguiente">Mes Siguiente →</button>
+                    </div>
+                </div>
+
+                <!-- Leyenda de ocupación -->
+                <div class="leyenda-colores">
+                    <span class="leyenda-item"><span class="leyenda-dot" style="background:#ffffff;"></span> Libre (0%)</span>
+                    <span class="leyenda-item"><span class="leyenda-dot" style="background:#dcfce7;"></span> Baja ocupación</span>
+                    <span class="leyenda-item"><span class="leyenda-dot" style="background:#fef08a;"></span> Media ocupación</span>
+                    <span class="leyenda-item"><span class="leyenda-dot" style="background:#fed7aa;"></span> Alta ocupación</span>
+                    <span class="leyenda-item"><span class="leyenda-dot" style="background:#fecaca;"></span> Lleno (100%) / Martes Cerrado</span>
+                </div>
+
+                <div class="calendar-grid" id="calendarioGrid"></div>
+            </div>
+
+            <!-- ================= LISTA DETALLADA DE CITAS AGENDADAS ================= -->
+            <div class="calendar-card">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+                    <h3 class="h5 fw-bold mb-0" style="color: var(--vet-azul-oscuro);">
+                        Lista de citas agendadas <span id="etiquetaFiltroFecha" class="badge bg-primary-subtle text-primary ms-2"></span>
+                    </h3>
+                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill d-none" id="btnLimpiarFiltroFecha">
+                        Ver todas las del mes
+                    </button>
+                </div>
+
+                <!-- Filtros -->
+                <div class="row g-2 p-3 bg-light rounded-3 border mb-3">
+                    <div class="col-md-4">
+                        <select class="form-select form-select-sm" id="filtroEstado">
+                            <option value="TODOS">-- Todos los estados --</option>
+                            <option value="Pendiente">Pendiente por confirmar</option>
+                            <option value="Confirmada">Confirmada</option>
+                            <option value="Cancelada">Cancelada</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select form-select-sm" id="filtroEspecie">
+                            <option value="TODAS">-- Todas las especies --</option>
+                            <option value="Perro">Perro</option>
+                            <option value="Gato">Gato</option>
+                            <option value="Conejo">Conejo</option>
+                            <option value="Ave">Ave</option>
+                            <option value="Otra">Otras especies</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="search" class="form-control form-control-sm" id="busquedaCita" placeholder="Buscar mascota, dueño o teléfono...">
+                    </div>
+                </div>
+
+                <div id="listaCitasAdmin" class="d-flex flex-column gap-3"></div>
+            </div>
+        </main>
     </div>
 
     <!-- ================= MODAL LISTA DE CITAS DEL DÍA ================= -->
@@ -264,7 +261,7 @@
         </div>
     </div>
 
-    <!-- Modal para que el Admin también pueda agendar manualmente -->
+    <!-- ================= MODAL REGISTRO MANUAL ADMIN ================= -->
     <div class="modal fade" id="modalFormularioCita" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content border-0 shadow-lg rounded-4">
@@ -324,6 +321,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/citas.js"></script>
+    <script src="../assets/sidebar.js"></script>
+    <script src="../../js/citas.js"></script>
 </body>
 </html>

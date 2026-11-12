@@ -6,7 +6,7 @@
  */
 
 const STORAGE_KEY = "bg_animal_care_citas_v1";
-const API_URL = "api_citas.php"; // Se sincroniza automáticamente si está en servidor PHP/HostGator
+const API_URL = document.body?.dataset?.apiUrl || "api_citas.php"; // Ruta dinámica (raíz o Admin/index/)
 
 const MESES_ES = [
     "enero", "febrero", "marzo", "abril", "mayo", "junio",

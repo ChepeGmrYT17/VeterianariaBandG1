@@ -13,122 +13,11 @@
 body {
     font-family: "Plus Jakarta Sans", system-ui, sans-serif;
     color: var(--vet-texto);
-    background-color: #f4f7fb;
+    background-color: #f8f9fb;
     margin: 0;
 }
 
-/* ================= ADMIN SIDEBAR LAYOUT (Estilo SIGIAC) ================= */
-.admin-wrapper {
-    display: flex;
-    min-height: 100vh;
-}
-
-.admin-sidebar {
-    width: 265px;
-    background: var(--vet-azul-oscuro);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    z-index: 1030;
-}
-
-.sidebar-brand {
-    padding: 1.4rem 1.3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.sidebar-brand-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.14);
-    display: grid;
-    place-items: center;
-    font-size: 1.4rem;
-    color: #fff;
-    flex-shrink: 0;
-}
-
-.sidebar-section-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.55);
-    padding: 1.2rem 1.3rem 0.5rem;
-}
-
-.sidebar-nav {
-    list-style: none;
-    padding: 0 0.8rem;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.sidebar-link {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    padding: 0.72rem 1rem;
-    border-radius: 10px;
-    color: rgba(255, 255, 255, 0.85);
-    text-decoration: none;
-    font-size: 0.92rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.sidebar-link:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-}
-
-.sidebar-link.active {
-    background: #fff;
-    color: var(--vet-azul-oscuro);
-    font-weight: 700;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.admin-main {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.admin-topbar {
-    background: #fff;
-    border-bottom: 1px solid var(--border-grid);
-    padding: 0.85rem 1.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.admin-badge-pill {
-    background: var(--vet-fondo-claro);
-    color: var(--vet-azul-oscuro);
-    padding: 0.4rem 0.9rem;
-    border-radius: 999px;
-    font-size: 0.83rem;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* ================= CLIENT NAVBAR ================= */
+/* ================= CLIENT NAVBAR (PÚBLICO citas.php) ================= */
 .client-header {
     background: #fff;
     border-bottom: 1px solid var(--border-grid);
@@ -254,13 +143,13 @@ body {
 
 .calendar-day {
     background: #fff;
-    min-height: 118px;
+    min-height: 112px;
     padding: 0.55rem 0.65rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .calendar-day.empty {
@@ -300,31 +189,11 @@ body {
 }
 
 /* ================= PROGRESIÓN DE COLORES POR DISPONIBILIDAD ================= */
-/* 0% Ocupado - Disponible */
-.occ-0 {
-    background-color: #ffffff;
-}
-
-/* 1% - 34% Ocupado - Verde suave */
-.occ-low {
-    background-color: #dcfce7;
-}
-
-/* 35% - 69% Ocupado - Amarillo cálido */
-.occ-med {
-    background-color: #fef08a;
-}
-
-/* 70% - 99% Ocupado - Naranja intenso */
-.occ-high {
-    background-color: #fed7aa;
-}
-
-/* 100% Ocupado - Rojo lleno */
-.occ-full {
-    background-color: #fecaca;
-    color: #7f1d1d;
-}
+.occ-0    { background-color: #ffffff; }
+.occ-low  { background-color: #dcfce7; }
+.occ-med  { background-color: #fef08a; }
+.occ-high { background-color: #fed7aa; }
+.occ-full { background-color: #fecaca; color: #7f1d1d; }
 
 /* Martes Cerrado - Siempre Rojo */
 .day-tuesday-closed {
@@ -332,22 +201,16 @@ body {
     color: #991b1b;
     cursor: not-allowed !important;
 }
-
-.day-tuesday-closed .day-number {
-    color: #991b1b;
-}
+.day-tuesday-closed .day-number { color: #991b1b; }
 
 /* Días pasados */
 .day-past {
     background-color: #f1f5f9 !important;
     opacity: 0.65;
 }
+.client-day-past { cursor: not-allowed !important; }
 
-.client-day-past {
-    cursor: not-allowed !important;
-}
-
-/* Etiquetas de estado en celda (Cliente y Admin) */
+/* Etiquetas de estado en celda */
 .slot-status-pill {
     font-size: 0.72rem;
     font-weight: 700;
@@ -357,134 +220,9 @@ body {
     width: fit-content;
 }
 
-.pill-disponible {
-    background: rgba(13, 92, 182, 0.1);
-    color: var(--vet-azul-oscuro);
-}
-
-.pill-pocos {
-    background: rgba(194, 65, 12, 0.15);
-    color: #9a3412;
-}
-
-.pill-lleno, .pill-cerrado {
-    background: rgba(185, 28, 28, 0.15);
-    color: #991b1b;
-}
-
-/* ================= PÍLDORAS DE CITAS EN VISTA ADMIN ================= */
-.admin-citas-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-top: 4px;
-    max-height: 82px;
-    overflow-y: auto;
-}
-
-.admin-cita-pill {
-    font-size: 0.72rem;
-    font-weight: 600;
-    padding: 3px 6px;
-    border-radius: 6px;
-    background: #fff7ed;
-    border-left: 3px solid #ea580c;
-    color: #7c2d12;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    cursor: pointer;
-    transition: transform 0.1s ease;
-}
-
-.admin-cita-pill:hover {
-    transform: translateX(2px);
-    background: #ffedd5;
-}
-
-.admin-cita-pill.confirmada {
-    background: #ecfdf5;
-    border-left-color: #059669;
-    color: #065f46;
-}
-
-.admin-cita-pill.cancelada {
-    background: #f1f5f9;
-    border-left-color: #64748b;
-    color: #475569;
-    text-decoration: line-through;
-}
-
-/* ================= LISTA INFERIOR DE CITAS (ADMIN) ================= */
-.cita-list-item {
-    background: #fff;
-    border: 1px solid var(--border-grid);
-    border-left: 5px solid var(--vet-azul);
-    border-radius: 14px;
-    padding: 1rem 1.25rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    transition: box-shadow 0.2s ease;
-}
-
-.cita-list-item:hover {
-    box-shadow: 0 6px 18px rgba(11, 42, 99, 0.06);
-}
-
-.cita-list-item.confirmada { border-left-color: #10b981; }
-.cita-list-item.pendiente { border-left-color: #f59e0b; }
-.cita-list-item.cancelada { border-left-color: #ef4444; opacity: 0.75; }
-
-.wa-phone-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #dcfce7;
-    color: #15803d;
-    font-weight: 700;
-    padding: 4px 11px;
-    border-radius: 999px;
-    text-decoration: none;
-    font-size: 0.85rem;
-    transition: background 0.2s, transform 0.2s;
-}
-
-.wa-phone-link:hover {
-    background: #22c55e;
-    color: #fff;
-    transform: translateY(-1px);
-}
-
-/* ================= RESPONSIVO ================= */
-@media (max-width: 991.98px) {
-    .admin-sidebar {
-        display: none;
-    }
-    .calendar-day {
-        min-height: 92px;
-        padding: 0.4rem;
-    }
-}
-
-@media (max-width: 575.98px) {
-    .calendar-card {
-        padding: 0.85rem;
-    }
-    .calendar-day {
-        min-height: 76px;
-        padding: 0.3rem;
-    }
-    .day-number {
-        font-size: 0.8rem;
-    }
-    .slot-status-pill {
-        font-size: 0.62rem;
-        padding: 2px 5px;
-    }
-}
+.pill-disponible { background: rgba(13, 92, 182, 0.1); color: var(--vet-azul-oscuro); }
+.pill-pocos      { background: rgba(194, 65, 12, 0.15); color: #9a3412; }
+.pill-lleno, .pill-cerrado { background: rgba(185, 28, 28, 0.15); color: #991b1b; }
 
 /* ================= BOTÓN DE CONTEO DE CITAS EN CALENDARIO ADMIN ================= */
 .btn-admin-citas-count {
@@ -508,4 +246,59 @@ body {
 .btn-admin-citas-count:hover {
     background: var(--vet-azul-hover);
     transform: translateY(-1px);
+}
+
+/* ================= LISTA INFERIOR Y MODAL DE CITAS (ADMIN) ================= */
+.cita-list-item {
+    background: #fff;
+    border: 1px solid var(--border-grid);
+    border-left: 5px solid var(--vet-azul);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: box-shadow 0.2s ease;
+}
+
+.cita-list-item:hover {
+    box-shadow: 0 6px 18px rgba(11, 42, 99, 0.06);
+}
+
+.cita-list-item.confirmada { border-left-color: #10b981; }
+.cita-list-item.pendiente  { border-left-color: #f59e0b; }
+.cita-list-item.cancelada  { border-left-color: #ef4444; opacity: 0.75; }
+
+.wa-phone-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #dcfce7;
+    color: #15803d;
+    font-weight: 700;
+    padding: 4px 11px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.wa-phone-link:hover {
+    background: #22c55e;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* ================= RESPONSIVO ================= */
+@media (max-width: 991.98px) {
+    .calendar-day { min-height: 92px; padding: 0.4rem; }
+}
+
+@media (max-width: 575.98px) {
+    .calendar-card { padding: 0.85rem; }
+    .calendar-day  { min-height: 76px; padding: 0.3rem; }
+    .day-number    { font-size: 0.8rem; }
+    .slot-status-pill { font-size: 0.62rem; padding: 2px 5px; }
 }

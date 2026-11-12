@@ -228,3 +228,85 @@ body { background: #f8f9fb; }
   background: var(--color-activo-fondo);
   color: var(--color-activo-texto);
 }
+
+/* ---------- Perfil de Usuario Activo y Cerrar Sesión en Sidebar ---------- */
+.perfil-usuario-caja {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px solid #eef2f6;
+}
+
+.perfil-info {
+  min-width: 0;
+  flex: 1;
+  line-height: 1.25;
+}
+
+.perfil-nombre {
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #1f2937;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.perfil-rol {
+  display: inline-block;
+  margin-top: 2px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: var(--color-activo-fondo);
+  color: var(--color-activo-texto);
+}
+
+.btn-cerrar-sesion {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  margin-top: 8px;
+  padding: 11px 16px;
+  border-radius: 12px;
+  border: 1px solid #fee2e2;
+  background: #fef2f2;
+  color: #dc2626;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .2s, color .2s, transform .15s;
+}
+
+.btn-cerrar-sesion i {
+  width: 20px;
+  text-align: center;
+}
+
+.btn-cerrar-sesion:hover {
+  background: #dc2626;
+  color: #fff;
+}
+
+@media (min-width: 992px) {
+  .colapsada .perfil-usuario-caja {
+    justify-content: center;
+    padding: 8px 0;
+    background: transparent;
+    border-color: transparent;
+  }
+  .colapsada .btn-cerrar-sesion {
+    justify-content: center;
+    gap: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

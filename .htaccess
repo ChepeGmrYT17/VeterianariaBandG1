@@ -2,23 +2,26 @@
 Options -Indexes
 IndexIgnore *
 
-# 2. Archivo por defecto al entrar a la raíz
-DirectoryIndex index.html
+# 2. Archivo por defecto al entrar a la raíz o subcarpetas
+DirectoryIndex index.php index.html
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
 
-    # Forzar HTTPS
+    # Forzar conexión segura HTTPS
     RewriteCond %{HTTPS} off
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # Si alguien intenta entrar directo a una carpeta existente en el navegador (ej: tusitio.com/img/)
-    # lo redirige al inicio en lugar de mostrar error o el contenido
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^.+/?$ /index.html [R=301,L]
+    # Si entran directo a /Admin o /Admin/ redirigir al login del panel
+    RewriteRule ^Admin/?$ /Admin/login.php [R=302,L]
 
-    # Bloquear descarga de archivos del sistema o código fuente crítico
+    # Si intentan entrar a cualquier otra carpeta sin index (ej: /img/ o /css/) redirigir al inicio
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteCond %{REQUEST_URI} !^/Admin/index/?$ [NC]
+    RewriteRule ^.+/?$ /index.php [R=302,L]
+
+    # Bloquear descarga directa de archivos sensibles
     <FilesMatch "^(\.env|\.git|\.htaccess|\.htpasswd|composer\.(json|lock)|package\.(json|lock)|\.sql|\.log|\.md)$">
         Require all denied
     </FilesMatch>

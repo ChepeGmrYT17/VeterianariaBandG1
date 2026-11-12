@@ -13,9 +13,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
+    <link rel="icon" type="image/png" href="img/logo.png">
     <link rel="stylesheet" href="css/citas.css">
 </head>
-<body data-modo="cliente">
+<body data-modo="cliente" data-api-url="api_citas.php">
 
     <!-- Navbar Superior -->
     <header class="client-header sticky-top">
@@ -109,7 +110,6 @@
                     <input type="hidden" id="inputFechaCita" name="fecha">
 
                     <div class="row g-3">
-                        <!-- 1. Especie de la mascota -->
                         <div class="col-md-6">
                             <label for="especieMascota" class="form-label fw-semibold">
                                 <i class="fa-solid fa-paw text-primary me-1"></i> Especie de la mascota *
@@ -126,7 +126,6 @@
                             </select>
                         </div>
 
-                        <!-- 2. Nombre de la mascota -->
                         <div class="col-md-6">
                             <label for="nombreMascota" class="form-label fw-semibold">
                                 <i class="fa-solid fa-tag text-primary me-1"></i> Nombre de la mascota *
@@ -134,7 +133,6 @@
                             <input type="text" class="form-control rounded-3 py-2" id="nombreMascota" required placeholder="Ej. Max, Luna, Rocky">
                         </div>
 
-                        <!-- 3. Motivo de la consulta -->
                         <div class="col-12">
                             <label for="motivoConsulta" class="form-label fw-semibold">
                                 <i class="fa-solid fa-stethoscope text-primary me-1"></i> Motivo de la consulta *
@@ -142,7 +140,6 @@
                             <input type="text" class="form-control rounded-3 py-2" id="motivoConsulta" required placeholder="Ej. Consulta general, vacunación, revisión de piel, desparasitación...">
                         </div>
 
-                        <!-- 4. Nombre del propietario -->
                         <div class="col-md-6">
                             <label for="nombrePropietario" class="form-label fw-semibold">
                                 <i class="fa-solid fa-user text-primary me-1"></i> Nombre del propietario *
@@ -150,7 +147,6 @@
                             <input type="text" class="form-control rounded-3 py-2" id="nombrePropietario" required placeholder="Nombre completo">
                         </div>
 
-                        <!-- 5. Número de teléfono -->
                         <div class="col-md-6">
                             <label for="telefonoPropietario" class="form-label fw-semibold">
                                 <i class="fa-brands fa-whatsapp text-success me-1"></i> Número de teléfono (WhatsApp) *
@@ -159,7 +155,6 @@
                             <div class="form-text">Lo usaremos para enviarte confirmación por WhatsApp.</div>
                         </div>
 
-                        <!-- 6. Hora de la cita (cada 20 minutos, solo disponibles) -->
                         <div class="col-12">
                             <label for="horaCita" class="form-label fw-semibold">
                                 <i class="fa-regular fa-clock text-primary me-1"></i> Hora de la cita (Horarios disponibles) *

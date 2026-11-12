@@ -52,8 +52,8 @@
                             <button type="button" class="btn btn-outline-primary rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#modalLogin">
                                 <i class="fa-solid fa-right-to-bracket me-1"></i> Ingresar
                             </button>
-                            <!-- Botón Agendar Cita -> Redirige a agendar_cita.html -->
-                            <a href="agendar_cita.html" class="btn boton-vet boton-vet-peq">
+                            <!-- Botón Agendar Cita -> Redirige a citas.php -->
+                            <a href="citas.php" class="btn boton-vet boton-vet-peq">
                                 <i class="bi bi-calendar3"></i> Agendar cita
                             </a>
                         </div>
@@ -97,7 +97,7 @@
                             </li>
                         </ul>
                         <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                            <a href="agendar_cita.html" class="btn boton-vet boton-vet-grand">
+                            <a href="citas.php" class="btn boton-vet boton-vet-grand">
                                 <i class="bi bi-calendar-plus"></i> Agendar cita ahora
                             </a>
                         </div>
@@ -192,7 +192,7 @@
                                     <span>Recordatorios directos vía WhatsApp para sus próximas consultas.</span>
                                 </li>
                             </ul>
-                            <a href="agendar_cita.html" class="btn boton-vet boton-vet-peq">Agendar consulta</a>
+                            <a href="citas.php" class="btn boton-vet boton-vet-peq">Agendar consulta</a>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -302,14 +302,14 @@
                 </div>
                 <div class="modal-body pt-3">
                     <p class="text-muted small mb-4">Ingresa con tus credenciales asignadas para administrar citas, expedientes e inventario.</p>
-                    <form action="admin_citas.html" method="GET">
+                    <form action="Admin/login.php" method="POST">
                         <div class="mb-3">
                             <label for="correo" class="form-label fw-semibold small">Correo Electrónico</label>
-                            <input type="email" class="form-control rounded-3 py-2" id="correo" required placeholder="personal@bgvet.mx">
+                            <input type="email" class="form-control rounded-3 py-2" id="correo" name="email" required placeholder="personal@bgvet.mx">
                         </div>
                         <div class="mb-4">
                             <label for="clave" class="form-label fw-semibold small">Contraseña</label>
-                            <input type="password" class="form-control rounded-3 py-2" id="clave" required placeholder="••••••••">
+                            <input type="password" class="form-control rounded-3 py-2" id="clave" name="password" required placeholder="••••••••">
                         </div>
                         <button type="submit" class="btn boton-vet w-100 justify-content-center py-2">
                             Iniciar Sesión

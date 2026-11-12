@@ -1,26 +1,11 @@
 <?php
 /**
  * API REST para Gestión de Citas - Veterinaria B&G Animal Care
- * Compatible con MySQL / MariaDB en HostGator
+ * Reutiliza la conexión PDO de Admin/config/db.php
  */
 header('Content-Type: application/json; charset=utf-8');
 
-// Configura tus credenciales de HostGator (cPanel -> Manage My Databases)
-$host = 'localhost';
-$db   = 'edgarge2_animalcare';
-$user = 'edgarge2_animalcare';
-$pass = '#}{ZWMpprdhuR!dF';
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ]);
-} catch (PDOException $e) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Error de conexión a la base de datos']);
-    exit;
-}
+require_once __DIR__ . '/Admin/config/db.php';
 
 // Crear tabla automática si aún no existe
 $pdo->exec("
@@ -49,6 +34,12 @@ if ($action === 'listar') {
 if ($action === 'crear' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
 
+    if (empty($data['fecha']) || empty($data['hora']) || empty($data['nombre_mascota']) || empty($data['nombre_propietario']) || empty($data['telefono'])) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Datos incompletos']);
+        exit;
+    }
+
     // Validar que el horario no esté ya ocupado
     $check = $pdo->prepare("SELECT COUNT(*) FROM citas_web WHERE fecha = ? AND hora = ? AND estado != 'Cancelada'");
     $check->execute([$data['fecha'], $data['hora']]);
@@ -65,9 +56,9 @@ if ($action === 'crear' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute([
         $data['fecha'],
         $data['hora'],
-        $data['especie'],
+        $data['especie'] ?? 'Perro',
         $data['nombre_mascota'],
-        $data['motivo'],
+        $data['motivo'] ?? 'Consulta general',
         $data['nombre_propietario'],
         $data['telefono']
     ]);
@@ -77,6 +68,15 @@ if ($action === 'crear' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 if ($action === 'estado' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (empty($_SESSION['usuario_id'])) {
+        http_response_code(403);
+        echo json_encode(['error' => 'No autorizado']);
+        exit;
+    }
+
     $data = json_decode(file_get_contents('php://input'), true);
     $stmt = $pdo->prepare("UPDATE citas_web SET estado = ? WHERE id = ?");
     $stmt->execute([$data['estado'], $data['id']]);

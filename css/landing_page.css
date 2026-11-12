@@ -176,7 +176,7 @@ body{
         margin-right: auto;
     }
     .caracteristicas li{width: 100%;}
-    .boton-vet-grande{width: 100%; justify-content: center; font-size: 1.2rem;}
+    .boton-vet-grand{width: 100%; justify-content: center; font-size: 1.2rem;}
     .portada::after{height: 70px;}
 }
 
