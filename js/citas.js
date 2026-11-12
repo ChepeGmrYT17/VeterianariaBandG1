@@ -384,7 +384,7 @@ function renderizarCalendario() {
                 cell.addEventListener("click", () => abrirModalCliente(fechaISO, disp.disponibles));
             }
         } else {
-            // ================= VISTA ADMINISTRADOR (VE TODAS LAS CITAS) =================
+            // ================= VISTA ADMINISTRADOR (BOTÓN CON CONTEO DE CITAS) =================
             cell.classList.add("clickable");
             let contenidoAdmin = "";
 
@@ -396,36 +396,39 @@ function renderizarCalendario() {
                     .sort((a, b) => a.hora.localeCompare(b.hora));
 
                 if (citasDia.length > 0) {
-                    const pills = citasDia.map(c => {
-                        const claseEstado = c.estado === "Confirmada" ? "confirmada" : (c.estado === "Cancelada" ? "cancelada" : "");
-                        return `<div class="admin-cita-pill ${claseEstado}" data-cita-id="${c.id}" title="${formatearHora12h(c.hora)} - ${c.nombre_mascota} (${c.nombre_propietario})">
-                            ${formatearHora12h(c.hora)} · ${c.nombre_mascota}
-                        </div>`;
-                    }).join("");
-                    contenidoAdmin = `<div class="admin-citas-stack">${pills}</div>`;
+                    const textoCitas = citasDia.length === 1 ? "1 cita" : `${citasDia.length} citas`;
+                    contenidoAdmin = `
+                        <div class="mt-auto">
+                            <button type="button" class="btn-admin-citas-count" data-fecha="${fechaISO}">
+                                <i class="bi bi-calendar2-check-fill"></i> ${textoCitas}
+                            </button>
+                        </div>
+                    `;
                 } else {
-                    contenidoAdmin = `<span class="text-muted" style="font-size:0.72rem;">${disp.disponibles.length} libres</span>`;
+                    contenidoAdmin = `<div class="mt-auto"><span class="text-muted" style="font-size:0.72rem;">${disp.disponibles.length} libres</span></div>`;
                 }
             }
 
             cell.innerHTML = `${headerHtml}${contenidoAdmin}`;
 
-            // Clic en píldora específica -> Abre modal detalle de esa cita
-            cell.querySelectorAll(".admin-cita-pill").forEach(pill => {
-                pill.addEventListener("click", (e) => {
+            // Clic en el botón de conteo -> Abre la ventana modal con todas las citas del día
+            const btnConteo = cell.querySelector(".btn-admin-citas-count");
+            if (btnConteo) {
+                btnConteo.addEventListener("click", (e) => {
                     e.stopPropagation();
-                    abrirModalDetalleCita(pill.dataset.citaId);
+                    abrirModalCitasDia(fechaISO);
                 });
-            });
+            }
 
-            // Clic en la celda del día -> Filtra la lista inferior por ese día
+            // Clic en la celda del día -> Abre la ventana si tiene citas o filtra la lista inferior
             cell.addEventListener("click", () => {
+                if (!disp.esMartes) {
+                    abrirModalCitasDia(fechaISO);
+                }
                 fechaFiltroAdmin = fechaISO;
                 renderizarListaAdmin();
-                document.getElementById("listaCitasAdmin")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
             });
         }
-
         grid.appendChild(cell);
     }
 
@@ -629,6 +632,95 @@ window.abrirModalDetalleCita = function(idCita) {
     };
 
     bootstrap.Modal.getOrCreateInstance(document.getElementById("modalDetalleCita")).show();
+};
+
+let fechaModalDiaActual = null;
+
+window.abrirModalCitasDia = function(fechaISO) {
+    fechaModalDiaActual = fechaISO;
+    const labelFecha = document.getElementById("modalCitasDiaFecha");
+    const contenedor = document.getElementById("modalCitasDiaLista");
+    if (!labelFecha || !contenedor) return;
+
+    labelFecha.textContent = formatearFechaLarga(fechaISO);
+
+    const citasDia = citasRegistradas
+        .filter(c => c.fecha === fechaISO)
+        .sort((a, b) => a.hora.localeCompare(b.hora));
+
+    if (citasDia.length === 0) {
+        contenedor.innerHTML = `
+            <div class="text-center py-4 text-muted">
+                <i class="bi bi-calendar2-minus fs-2 d-block mb-2"></i>
+                No hay citas registradas para este día.
+            </div>
+        `;
+    } else {
+        contenedor.innerHTML = citasDia.map(cita => {
+            const claseCard = cita.estado.toLowerCase();
+            const badgeColor = cita.estado === "Confirmada"
+                ? "bg-success-subtle text-success"
+                : (cita.estado === "Cancelada" ? "bg-danger-subtle text-danger" : "bg-warning-subtle text-warning-emphasis");
+
+            const waGeneral = construirUrlWhatsApp(cita, "general");
+            const waConfirmar = construirUrlWhatsApp(cita, "confirmar");
+            const waCancelar = construirUrlWhatsApp(cita, "cancelar");
+
+            return `
+                <div class="cita-list-item ${claseCard}">
+                    <div class="flex-grow-1">
+                        <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+                            <span class="badge bg-primary text-white rounded-pill">${formatearHora12h(cita.hora)}</span>
+                            <strong class="fs-6 text-dark">${cita.nombre_mascota} (${cita.especie})</strong>
+                            <span class="badge ${badgeColor} rounded-pill">${cita.estado}</span>
+                        </div>
+                        <div class="small text-muted mb-2">
+                            <strong>Propietario:</strong> ${cita.nombre_propietario} · 
+                            <strong>Motivo:</strong> ${cita.motivo}
+                        </div>
+                        <div class="d-flex flex-wrap align-items-center gap-2">
+                            <a href="${waGeneral}" target="_blank" rel="noopener" class="wa-phone-link" title="Abrir chat en WhatsApp">
+                                <i class="fa-brands fa-whatsapp"></i> ${cita.telefono}
+                            </a>
+                            <a href="${waConfirmar}" target="_blank" rel="noopener"
+                               class="btn btn-sm btn-success rounded-pill px-3 fw-semibold"
+                               onclick="cambiarEstadoDesdeModalDia('${cita.id}', 'Confirmada')">
+                                <i class="bi bi-check2"></i> Confirmar
+                            </a>
+                            <a href="${waCancelar}" target="_blank" rel="noopener"
+                               class="btn btn-sm btn-outline-danger rounded-pill px-3 fw-semibold"
+                               onclick="cambiarEstadoDesdeModalDia('${cita.id}', 'Cancelada')">
+                                <i class="bi bi-x-lg"></i> Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join("");
+    }
+
+    const btnAgendarDia = document.getElementById("btnAgendarDesdeModalDia");
+    if (btnAgendarDia) {
+        btnAgendarDia.onclick = () => {
+            bootstrap.Modal.getInstance(document.getElementById("modalCitasDia"))?.hide();
+            const inputFechaManual = document.getElementById("inputFechaCita");
+            if (inputFechaManual) {
+                inputFechaManual.value = fechaISO;
+                actualizarSelectHorasAdmin(fechaISO);
+                bootstrap.Modal.getOrCreateInstance(document.getElementById("modalFormularioCita")).show();
+            }
+        };
+    }
+
+    bootstrap.Modal.getOrCreateInstance(document.getElementById("modalCitasDia")).show();
+};
+
+window.cambiarEstadoDesdeModalDia = async function(idCita, nuevoEstado) {
+    await actualizarEstadoCita(idCita, nuevoEstado);
+    renderizarCalendario();
+    if (fechaModalDiaActual) {
+        abrirModalCitasDia(fechaModalDiaActual);
+    }
 };
 
 // =========================================================================

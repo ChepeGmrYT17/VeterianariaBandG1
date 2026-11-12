@@ -1,0 +1,230 @@
+/* ---------- Variables ---------- */
+:root {
+  --ancho-barra: 235px;
+  --ancho-barra-colapsada: 80px;
+  --color-activo-fondo: #d4e6fa;
+  --color-activo-texto: #10244d;
+}
+
+body { background: #f8f9fb; }
+
+/* ---------- Estructura general ---------- */
+.layout { display: flex; }
+
+#contenido { flex: 1; min-width: 0; padding: 16px; }
+
+/* ---------- Contenido interno del sidebar ---------- */
+.barra-lateral .offcanvas-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 16px 12px;
+  overflow-y: auto;
+}
+
+/* Logo */
+.logo-barra {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px 24px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #1f2937;
+}
+.logo-barra > i {
+  font-size: 22px;
+  color: var(--color-activo-texto);
+}
+
+/* Lista del menú: una opción debajo de otra */
+.menu-barra {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Cada opción del menú */
+.item-nav {
+  position: relative;          /* para ubicar el punto de notificación */
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: #555;
+  text-decoration: none;       /* quita el subrayado azul de Bootstrap */
+  white-space: nowrap;         /* evita saltos de línea al animar */
+}
+.item-nav i { width: 20px; text-align: center; }
+.item-nav:hover { background: #f6f4fb; color: #555; }
+
+/* Opción de la página actual */
+.item-nav.activo {
+  background: var(--color-activo-fondo);
+  color: var(--color-activo-texto);
+}
+
+.etiqueta { transition: opacity .2s; }
+
+/* Punto morado de notificación */
+.punto-aviso {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0d5cb6;
+}
+
+/* Zona inferior: Settings y perfil pegados al fondo */
+.parte-baja {
+  margin-top: auto;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+
+/* Avatar con indicador verde */
+.avatar {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.indicador-conectado {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid #fff;
+}
+
+/* ---------- CELULAR / TABLET (menos de 992px) ---------- */
+.barra-lateral { --bs-offcanvas-width: 260px; }
+
+/* ---------- ESCRITORIO (992px o más) ---------- */
+@media (min-width: 992px) {
+
+  .barra-lateral {
+    width: var(--ancho-barra) !important;
+    height: 100vh !important;
+    position: sticky !important;
+    top: 0;
+    flex-grow: 0 !important;
+    flex-shrink: 0;
+    background-color: #fff !important;
+    transition: width .25s ease !important;
+    overflow: visible;        /* ANTES: hidden. Ahora la flechita puede salirse del borde */
+    z-index: 20;              /* para que la flechita quede por encima del contenido */
+
+    display: flex;
+    flex-direction: column;
+
+    border-right: 0 !important;
+    box-shadow: 4px 0 14px rgba(15, 23, 42, .07);
+  }
+
+  /* Como el aside ya no recorta, el recorte lo hace el cuerpo interno */
+  .barra-lateral .offcanvas-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden; 
+    }
+
+  /* Modo colapsado (solo escritorio) */
+  .colapsada .barra-lateral { width: var(--ancho-barra-colapsada) !important; }
+  .colapsada .etiqueta { display: none; }
+
+  .colapsada .item-nav,
+  .colapsada .logo-barra {
+    justify-content: center;
+    gap: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .colapsada .punto-aviso { right: 18px; }
+}
+
+/* ---------- Flechita para colapsar / expandir (escritorio) ---------- */
+.boton-colapsar {
+  position: absolute;
+  top: 28px;
+  right: -14px;                 /* la mitad de su ancho (28px) queda fuera */
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  align-items: center;          /* el display:flex lo pone la clase d-lg-flex */
+  justify-content: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  background: #fff;
+  color: #6b7280;
+  font-size: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .18);
+  cursor: pointer;
+  z-index: 30;
+  transition: background .2s, color .2s, box-shadow .2s;
+}
+.boton-colapsar:hover {
+  background: var(--color-activo-texto);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(109, 63, 209, .35);
+}
+
+/* Expandido: apunta a la izquierda (cerrar). Colapsado: se gira a la derecha (abrir) */
+.boton-colapsar i { transition: transform .25s ease; }
+.colapsada .boton-colapsar i { transform: rotate(180deg); }
+
+/* ---------- Botón de menú (hamburguesa, solo celular) ---------- */
+.boton-menu-movil {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  color: #374151;
+  font-size: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.boton-menu-movil:hover,
+.boton-menu-movil:active {
+  background: var(--color-activo-fondo);
+  color: var(--color-activo-texto);
+}
+
+/* ---------- Botón de cerrar (X, solo celular) ---------- */
+.boton-cerrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 1rem;
+  border: 0;
+  border-radius: 50%;
+  background: #f3f4f6;
+  color: #141515;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.boton-cerrar:hover {
+  background: var(--color-activo-fondo);
+  color: var(--color-activo-texto);
+}

@@ -485,3 +485,27 @@ body {
         padding: 2px 5px;
     }
 }
+
+/* ================= BOTÓN DE CONTEO DE CITAS EN CALENDARIO ADMIN ================= */
+.btn-admin-citas-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    padding: 0.42rem 0.65rem;
+    border: 0;
+    border-radius: 10px;
+    background: var(--vet-azul);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(13, 92, 182, 0.22);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.btn-admin-citas-count:hover {
+    background: var(--vet-azul-hover);
+    transform: translateY(-1px);
+}

@@ -17,7 +17,7 @@
 
     <!-- Icono logo en navegador -->
     <link id="favicon" rel="icon" type="image/png" href="img/logo.png">
-    <link rel="stylesheet" href="landing_page.css">
+    <link rel="stylesheet" href="css/landing_page.css">
 </head>
 <body>
 
@@ -322,6 +322,6 @@
 
     <!-- Scripts de Bootstrap y lógica personalizada -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="landing_page.js"></script>
+    <script src="js/landing_page.js"></script>
 </body>
 </html>
