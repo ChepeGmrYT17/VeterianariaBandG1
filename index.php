@@ -15,6 +15,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
+    <!-- Icono logo en navegador -->
+    <link id="favicon" rel="icon" type="image/png" href="img/logo.png">
     <link rel="stylesheet" href="landing_page.css">
 </head>
 <body>
@@ -198,7 +200,7 @@
                             <i class="fa-solid fa-truck-medical fs-1 mb-3"></i>
                             <h3 class="fw-bold mb-3">¿Tu mascota presenta una urgencia?</h3>
                             <p class="mb-4 text-white-50">Llámanos inmediatamente para orientarte y tener listo el equipo clínico a tu arribo.</p>
-                            <a href="tel:+521XXXXXXXXXX" class="btn btn-light rounded-pill px-4 py-3 fw-bold text-dark">
+                            <a href="tel:+524691267790" class="btn btn-light rounded-pill px-4 py-3 fw-bold text-dark">
                                 <i class="bi bi-telephone-fill me-2 text-danger"></i> Llamar al médico de guardia
                             </a>
                         </div>
@@ -223,7 +225,7 @@
                                 <div class="contacto-icono"><i class="fa-solid fa-location-dot"></i></div>
                                 <div>
                                     <h5 class="fw-bold mb-1">Dirección</h5>
-                                    <p class="text-muted mb-0">Veterinaria B&amp;G Animal Care, Guanajuato, México.</p>
+                                    <p class="text-muted mb-0">Veterinaria B&amp;G Animal Care, Pénjamo, Guanajuato.</p>
                                 </div>
                             </div>
                             <div class="tarjeta-contacto">
@@ -241,7 +243,7 @@
                                 <div class="contacto-icono"><i class="fa-brands fa-whatsapp"></i></div>
                                 <div>
                                     <h5 class="fw-bold mb-1">Atención por WhatsApp</h5>
-                                    <p class="text-muted mb-0">+52 (XXX) XXX-XXXX · Dudas y confirmación de citas</p>
+                                    <p class="text-muted mb-0">+52 (469) 132-3718 · Dudas y confirmación de citas</p>
                                 </div>
                             </div>
                         </div>
@@ -251,7 +253,7 @@
                     <div class="col-lg-7">
                         <div class="mapa-caja h-100">
                             <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119565.67923483256!2d-101.5947702!3d20.4497678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842c13d8d69f0001%3A0xa19c72f7786cefc!2sP%C3%A9njamo%2C%20Gto.!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.8060103333833!2d-101.71964489999999!3d20.4320627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842c13c632c0bea5%3A0xb654a2e99ffec23e!2sVeterinaria%20B%26G%20Animal%20Care!5e0!3m2!1ses-419!2smx!4v1794492188647!5m2!1ses-419!2smx"
                                 width="100%" 
                                 height="100%" 
                                 style="border:0; min-height: 350px;" 
@@ -280,7 +282,7 @@
     </footer>
 
     <!-- ================= BOTÓN FLOTANTE WHATSAPP ================= -->
-    <a href="https://wa.me/521XXXXXXXXXX?text=Hola,%20solicito%20informaci%C3%B3n%20sobre%20sus%20servicios%20veterinarios" 
+    <a href="https://wa.me/5214691323718?text=Hola,%20solicito%20informaci%C3%B3n%20sobre%20sus%20servicios%20veterinarios" 
        target="_blank" 
        rel="noopener" 
        class="btn-flotante-wsp" 

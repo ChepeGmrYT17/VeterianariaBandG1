@@ -7,9 +7,9 @@ header('Content-Type: application/json; charset=utf-8');
 
 // Configura tus credenciales de HostGator (cPanel -> Manage My Databases)
 $host = 'localhost';
-$db   = 'tu_base_de_datos';
-$user = 'tu_usuario_mysql';
-$pass = 'tu_contrasena_mysql';
+$db   = 'edgarge2_animalcare';
+$user = 'edgarge2_animalcare';
+$pass = '#}{ZWMpprdhuR!dF';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass, [
