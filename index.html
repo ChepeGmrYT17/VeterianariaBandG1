@@ -1,887 +1,317 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="theme-color" content="#107559">
-	<meta name="description" content="Veterinaria B&G Animal Care: Cuidado médico integral, cirugías, vacunas y atención especializada para tu mascota.">
-	<title>Veterinaria B&amp;G Animal Care | Cuidamos de quienes amas</title>
-	
-	<!-- Google Fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" type="image/png" href="img/logo.png">
-	<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>B&G Animal Care | Clínica Veterinaria</title>
+    
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5.3.3 & Iconos -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
-	<style>
-		:root {
-			--primary: #107559;
-			--primary-dark: #0a4d3a;
-			--primary-light: #e8f5f0;
-			--accent: #f59e0b;
-			--accent-hover: #d97706;
-			--bg-surface: #fbfdfc;
-			--text-main: #1f2937;
-			--text-muted: #64748b;
-			--border-color: #e2e8f0;
-			--shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-			--shadow-md: 0 12px 30px -4px rgba(16, 117, 89, 0.08);
-			--shadow-lg: 0 20px 40px -10px rgba(16, 117, 89, 0.16);
-			--transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-		}
-
-		* { box-sizing: border-box; margin: 0; padding: 0; }
-		html { scroll-behavior: smooth; font-size: 16px; }
-		body {
-			font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-			color: var(--text-main);
-			background-color: var(--bg-surface);
-			line-height: 1.6;
-			overflow-x: hidden;
-		}
-
-		a { text-decoration: none; color: inherit; }
-		ul { list-style: none; }
-		.container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
-
-		/* Top Announcement */
-		.topbar {
-			background: var(--primary-dark);
-			color: #e6f4ef;
-			font-size: 0.85rem;
-			font-weight: 500;
-			padding: 9px 0;
-			text-align: center;
-			letter-spacing: 0.02em;
-		}
-
-		/* Header & Nav */
-		header {
-			position: sticky;
-			top: 0;
-			z-index: 100;
-			background: rgba(255, 255, 255, 0.9);
-			backdrop-filter: blur(14px);
-			border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-			transition: var(--transition);
-		}
-		.nav {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			min-height: 76px;
-		}
-		.brand {
-			display: flex;
-			align-items: center;
-			gap: 12px;
-			font-weight: 800;
-			font-size: 1.25rem;
-			color: var(--primary-dark);
-		}
-		.brand-mark {
-			width: 44px;
-			height: 44px;
-			background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-			color: #fff;
-			display: grid;
-			place-items: center;
-			border-radius: 12px;
-			box-shadow: 0 4px 12px rgba(16, 117, 89, 0.25);
-		}
-		.brand-mark svg { width: 24px; height: 24px; fill: currentColor; }
-		.brand-text small {
-			display: block;
-			font-size: 0.65rem;
-			letter-spacing: 0.12em;
-			color: var(--text-muted);
-			font-weight: 600;
-			text-transform: uppercase;
-		}
-		.links {
-			display: flex;
-			align-items: center;
-			gap: 28px;
-			font-weight: 600;
-			font-size: 0.95rem;
-		}
-		.links a:not(.btn) {
-			color: var(--text-muted);
-			transition: var(--transition);
-		}
-		.links a:not(.btn):hover { color: var(--primary); }
-
-		/* Botones */
-		.btn {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			gap: 8px;
-			padding: 12px 22px;
-			border-radius: 9999px;
-			font-weight: 700;
-			font-size: 0.92rem;
-			border: none;
-			cursor: pointer;
-			transition: var(--transition);
-		}
-		.btn-primary {
-			background: var(--primary);
-			color: #fff;
-			box-shadow: 0 6px 18px rgba(16, 117, 89, 0.25);
-		}
-		.btn-primary:hover {
-			background: var(--primary-dark);
-			transform: translateY(-2px);
-			box-shadow: 0 10px 24px rgba(16, 117, 89, 0.3);
-		}
-		.btn-secondary {
-			background: #fff;
-			color: var(--primary-dark);
-			border: 1px solid var(--border-color);
-		}
-		.btn-secondary:hover {
-			border-color: var(--primary);
-			color: var(--primary);
-			transform: translateY(-2px);
-		}
-		.btn-login {
-			background: transparent;
-			color: var(--primary);
-			border: 1.5px solid var(--primary);
-			padding: 9px 18px;
-		}
-		.btn-login:hover {
-			background: var(--primary);
-			color: #fff;
-		}
-		.menu-toggle {
-			display: none;
-			background: none;
-			border: none;
-			cursor: pointer;
-			padding: 8px;
-			color: var(--primary-dark);
-		}
-
-		/* Hero Section */
-		.hero {
-			position: relative;
-			padding: 70px 0 90px;
-			background: radial-gradient(circle at top right, #e8f5f0 0%, #ffffff 65%);
-			overflow: hidden;
-		}
-		.hero-grid {
-			display: grid;
-			grid-template-columns: 1.15fr 0.85fr;
-			align-items: center;
-			gap: 50px;
-		}
-		.badge {
-			display: inline-flex;
-			align-items: center;
-			gap: 8px;
-			background: var(--primary-light);
-			color: var(--primary-dark);
-			padding: 6px 14px;
-			border-radius: 30px;
-			font-size: 0.82rem;
-			font-weight: 700;
-			margin-bottom: 22px;
-			text-transform: uppercase;
-			letter-spacing: 0.05em;
-		}
-		.badge-dot {
-			width: 8px;
-			height: 8px;
-			border-radius: 50%;
-			background: var(--accent);
-			box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25);
-		}
-		h1 {
-			font-size: clamp(2.4rem, 4.5vw, 3.8rem);
-			font-weight: 800;
-			line-height: 1.1;
-			letter-spacing: -0.03em;
-			margin-bottom: 22px;
-		}
-		h1 span {
-			background: linear-gradient(135deg, var(--primary) 0%, #0d9488 100%);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-		}
-		.hero-desc {
-			color: var(--text-muted);
-			font-size: 1.1rem;
-			max-width: 520px;
-			margin-bottom: 32px;
-		}
-		.hero-actions {
-			display: flex;
-			align-items: center;
-			gap: 16px;
-			flex-wrap: wrap;
-			margin-bottom: 40px;
-		}
-
-		/* Tarjetas Flotantes Visual */
-		.hero-visual {
-			position: relative;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-		.hero-card-base {
-			width: 100%;
-			max-width: 420px;
-			aspect-ratio: 1/1;
-			background: linear-gradient(145deg, #e4f2eb, #d1e9de);
-			border-radius: 40px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			position: relative;
-			box-shadow: var(--shadow-lg);
-			animation: morphBlob 10s ease-in-out infinite alternate;
-		}
-		.hero-card-base svg.main-pet {
-			width: 60%;
-			height: 60%;
-			fill: var(--primary-dark);
-			filter: drop-shadow(0 15px 15px rgba(10, 77, 58, 0.15));
-			animation: softBounce 3.5s ease-in-out infinite;
-		}
-		.floating-pill {
-			position: absolute;
-			background: #ffffff;
-			padding: 12px 18px;
-			border-radius: 16px;
-			box-shadow: var(--shadow-md);
-			display: flex;
-			align-items: center;
-			gap: 12px;
-			font-weight: 700;
-			font-size: 0.9rem;
-			border: 1px solid rgba(226, 232, 240, 0.8);
-		}
-		.floating-pill.pill-1 {
-			top: 6%;
-			left: -8%;
-			animation: float 4.5s ease-in-out infinite;
-		}
-		.floating-pill.pill-2 {
-			bottom: 8%;
-			right: -6%;
-			animation: float 5s ease-in-out infinite reverse;
-		}
-		.pill-icon {
-			width: 36px;
-			height: 36px;
-			background: var(--primary-light);
-			border-radius: 10px;
-			display: grid;
-			place-items: center;
-			color: var(--primary);
-		}
-
-		/* Sección General */
-		section { padding: 95px 0; }
-		.section-header {
-			text-align: center;
-			max-width: 640px;
-			margin: 0 auto 56px;
-		}
-		.section-header h2 {
-			font-size: clamp(2rem, 3.2vw, 2.7rem);
-			font-weight: 800;
-			letter-spacing: -0.02em;
-			margin-bottom: 12px;
-		}
-		.section-header p {
-			color: var(--text-muted);
-			font-size: 1.05rem;
-		}
-
-		/* Grid de Servicios */
-		.services { background: #fff; }
-		.services-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-			gap: 26px;
-		}
-		.service-card {
-			background: var(--bg-surface);
-			border: 1px solid var(--border-color);
-			padding: 34px 28px;
-			border-radius: 22px;
-			transition: var(--transition);
-			display: flex;
-			flex-direction: column;
-		}
-		.service-card:hover {
-			transform: translateY(-8px);
-			background: #ffffff;
-			border-color: rgba(16, 117, 89, 0.25);
-			box-shadow: var(--shadow-lg);
-		}
-		.service-icon {
-			width: 58px;
-			height: 58px;
-			border-radius: 16px;
-			background: var(--primary-light);
-			color: var(--primary);
-			display: grid;
-			place-items: center;
-			margin-bottom: 22px;
-			transition: var(--transition);
-		}
-		.service-card:hover .service-icon {
-			background: var(--primary);
-			color: #fff;
-			transform: scale(1.08);
-		}
-		.service-card h3 {
-			font-size: 1.25rem;
-			font-weight: 700;
-			margin-bottom: 10px;
-		}
-		.service-card p {
-			color: var(--text-muted);
-			font-size: 0.95rem;
-			line-height: 1.6;
-		}
-
-		/* Nosotros */
-		.about { background: #f4faf7; }
-		.about-grid {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: 60px;
-			align-items: center;
-		}
-		.about-box {
-			background: #ffffff;
-			padding: 40px;
-			border-radius: 28px;
-			box-shadow: var(--shadow-md);
-			border: 1px solid var(--border-color);
-		}
-		.checklist { display: grid; gap: 14px; margin: 26px 0 32px; }
-		.checklist-item {
-			display: flex;
-			align-items: center;
-			gap: 12px;
-			font-weight: 600;
-			color: var(--text-main);
-		}
-		.checklist-icon {
-			width: 24px;
-			height: 24px;
-			background: var(--primary-light);
-			color: var(--primary);
-			border-radius: 50%;
-			display: grid;
-			place-items: center;
-			font-size: 0.8rem;
-			flex-shrink: 0;
-		}
-
-		/* Contacto y Mapa */
-		.contact { background: #fff; }
-		.contact-grid {
-			display: grid;
-			grid-template-columns: 1fr 1.1fr;
-			gap: 40px;
-		}
-		.contact-details {
-			display: flex;
-			flex-direction: column;
-			gap: 24px;
-		}
-		.contact-card {
-			display: flex;
-			gap: 18px;
-			background: var(--bg-surface);
-			padding: 22px;
-			border-radius: 18px;
-			border: 1px solid var(--border-color);
-		}
-		.contact-card-icon {
-			width: 48px;
-			height: 48px;
-			border-radius: 12px;
-			background: var(--primary-light);
-			color: var(--primary);
-			display: grid;
-			place-items: center;
-			flex-shrink: 0;
-		}
-		.contact-card h4 { font-size: 1.05rem; margin-bottom: 4px; }
-		.contact-card p { font-size: 0.92rem; color: var(--text-muted); }
-
-		.map-container {
-			border-radius: 24px;
-			overflow: hidden;
-			box-shadow: var(--shadow-md);
-			border: 1px solid var(--border-color);
-			min-height: 380px;
-			background: #e2e8f0;
-		}
-		.map-container iframe {
-			width: 100%;
-			height: 100%;
-			min-height: 380px;
-			border: 0;
-		}
-
-		/* Botón Flotante WhatsApp */
-		.whatsapp-float {
-			position: fixed;
-			bottom: 30px;
-			right: 30px;
-			z-index: 99;
-			width: 60px;
-			height: 60px;
-			background: #25d366;
-			color: white;
-			border-radius: 50%;
-			display: grid;
-			place-items: center;
-			box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-			transition: var(--transition);
-		}
-		.whatsapp-float:hover {
-			transform: scale(1.1);
-			box-shadow: 0 14px 30px rgba(37, 211, 102, 0.5);
-		}
-		.whatsapp-float::before {
-			content: '';
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			border-radius: 50%;
-			background: inherit;
-			z-index: -1;
-			animation: pulse 2s infinite;
-		}
-
-		/* Footer */
-		footer {
-			background: var(--primary-dark);
-			color: #cbd5e1;
-			padding: 35px 0;
-			font-size: 0.92rem;
-		}
-		.footer-flex {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			flex-wrap: wrap;
-			gap: 16px;
-		}
-
-		/* Modal de Login (Acceso al Sistema) */
-		.modal-backdrop {
-			position: fixed;
-			inset: 0;
-			background: rgba(15, 23, 42, 0.6);
-			backdrop-filter: blur(4px);
-			z-index: 200;
-			display: grid;
-			place-items: center;
-			opacity: 0;
-			pointer-events: none;
-			transition: var(--transition);
-		}
-		.modal-backdrop.active {
-			opacity: 1;
-			pointer-events: auto;
-		}
-		.modal {
-			background: #fff;
-			padding: 36px;
-			border-radius: 24px;
-			width: min(420px, calc(100% - 32px));
-			box-shadow: var(--shadow-lg);
-			transform: translateY(20px);
-			transition: var(--transition);
-		}
-		.modal-backdrop.active .modal {
-			transform: translateY(0);
-		}
-		.modal-header {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			margin-bottom: 24px;
-		}
-		.modal-close {
-			background: none;
-			border: none;
-			font-size: 1.5rem;
-			cursor: pointer;
-			color: var(--text-muted);
-		}
-		.form-group { margin-bottom: 18px; }
-		.form-group label {
-			display: block;
-			font-weight: 600;
-			font-size: 0.88rem;
-			margin-bottom: 6px;
-		}
-		.form-group input {
-			width: 100%;
-			padding: 12px 14px;
-			border: 1px solid var(--border-color);
-			border-radius: 12px;
-			font-family: inherit;
-			font-size: 0.95rem;
-			outline: none;
-			transition: var(--transition);
-		}
-		.form-group input:focus {
-			border-color: var(--primary);
-			box-shadow: 0 0 0 3px rgba(16, 117, 89, 0.15);
-		}
-
-		/* Keyframes Animaciones */
-		@keyframes float {
-			0%, 100% { transform: translateY(0); }
-			50% { transform: translateY(-12px); }
-		}
-		@keyframes softBounce {
-			0%, 100% { transform: translateY(0) scale(1); }
-			50% { transform: translateY(-8px) scale(1.02); }
-		}
-		@keyframes morphBlob {
-			0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-			100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-		}
-		@keyframes pulse {
-			0% { transform: scale(1); opacity: 0.7; }
-			100% { transform: scale(1.45); opacity: 0; }
-		}
-
-		/* Responsive */
-		@media (max-width: 860px) {
-			.menu-toggle { display: block; }
-			.links {
-				position: absolute;
-				top: 76px;
-				left: 0;
-				right: 0;
-				background: #fff;
-				flex-direction: column;
-				padding: 24px;
-				gap: 16px;
-				border-bottom: 1px solid var(--border-color);
-				box-shadow: var(--shadow-md);
-				display: none;
-			}
-			.links.active { display: flex; }
-			.hero-grid, .about-grid, .contact-grid {
-				grid-template-columns: 1fr;
-				gap: 40px;
-			}
-			.hero { padding: 40px 0 60px; }
-			.floating-pill.pill-1 { left: 0; }
-			.floating-pill.pill-2 { right: 0; }
-			.footer-flex { flex-direction: column; text-align: center; }
-		}
-	</style>
+    <link rel="stylesheet" href="landing_page.css">
 </head>
 <body>
 
-	<!-- Top Notification -->
-	<div class="topbar">
-		🐾 Veterinaria B&amp;G Animal Care · Cuidamos la salud y felicidad de tus mejores amigos
-	</div>
+    <!-- ================= NAVBAR ================= -->
+    <div class="sticky-top">
+        <header class="encabezado">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <a href="#inicio" class="navbar-brand d-flex align-items-center gap-2">
+                        <img src="img/Logo_b&g.png" alt="Logo B&G" height="55" width="55" class="object-fit-contain">
+                        <span class="logo-texto">
+                            <strong>B&amp;G Animal Care</strong>
+                            <small>Clínica Veterinaria</small>
+                        </span>
+                    </a>
 
-	<!-- Header de Navegación -->
-	<header>
-		<nav class="nav container">
-			<a href="#inicio" class="brand">
-				<div class="brand-mark">
-					<!-- Icono Huella SVG -->
-					<svg viewBox="0 0 24 24"><path d="M12 8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm-4.7 1.2a2.3 2.3 0 1 0-1.8-4.2 2.3 2.3 0 0 0 1.8 4.2zm9.4 0a2.3 2.3 0 1 0 1.8-4.2 2.3 2.3 0 0 0-1.8 4.2zM4.3 14.5a2 2 0 1 0-1-3.9 2 2 0 0 0 1 3.9zm15.4 0a2 2 0 1 0 1-3.9 2 2 0 0 0-1 3.9zm-7.7-3.2c-3.1 0-5.5 2.2-5.5 5 0 2 1.3 3.7 3.3 4.4.7.2 1.5.3 2.2.3.7 0 1.5-.1 2.2-.3 2-.7 3.3-2.4 3.3-4.4 0-2.8-2.4-5-5.5-5z"/></svg>
-				</div>
-				<div class="brand-text">
-					B&amp;G Animal Care
-					<small>Clínica Veterinaria</small>
-				</div>
-			</a>
+                    <!-- Botón Hamburguesa -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir Menú">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-			<button class="menu-toggle" id="menuBtn" aria-label="Abrir menú">
-				<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-			</button>
+                    <!-- Menú Desplegable -->
+                    <div class="collapse navbar-collapse" id="menuPrincipal">
+                        <ul class="navbar-nav mx-auto mb-3 mb-lg-0 gap-lg-4 align-items-center">
+                            <li class="nav-item"><a href="#inicio" class="nav-link active">Inicio</a></li>
+                            <li class="nav-item"><a href="#servicios" class="nav-link">Servicios</a></li>
+                            <li class="nav-item"><a href="#nosotros" class="nav-link">Nosotros</a></li>
+                            <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
+                        </ul>
+                        <div class="d-flex align-items-center justify-content-center gap-2 mt-3 mt-lg-0">
+                            <!-- Botón Acceso al Sistema -->
+                            <button type="button" class="btn btn-outline-primary rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#modalLogin">
+                                <i class="fa-solid fa-right-to-bracket me-1"></i> Sistema
+                            </button>
+                            <!-- Botón Agendar Cita -->
+                            <a href="https://wa.me/5214691323718?text=Hola,%20me%20gustar%C3%ADa%20agendar%20una%20cita%20veterinaria" target="_blank" rel="noopener" class="btn boton-vet boton-vet-peq">
+                                <i class="bi bi-calendar3"></i> Agendar cita
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </div>
+    
+    <main>
+        <!-- ================= HERO ================= -->
+        <section class="portada" id="inicio">
+            <div class="container">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-6 portada-contenido">
+                        <h1 class="portada-titulo">
+                            Cuidado experto,
+                            <span class="acento">amor verdadero</span>
+                            <i class="fa-regular fa-heart corazon-decorativo"></i>
+                        </h1>
+                        <p class="portada-texto">
+                            En B&amp;G Animal Care brindamos atención veterinaria integral para mejorar la calidad de vida de tu mascota.
+                        </p>
 
-			<div class="links" id="navMenu">
-				<a href="#servicios">Servicios</a>
-				<a href="#nosotros">Nosotros</a>
-				<a href="#contacto">Ubicación y Horarios</a>
-				<!-- Botón Acceso Personal (Requerimiento Propuesta) -->
-				<button class="btn btn-login" id="openLogin">Acceso al Sistema</button>
-				<a href="https://wa.me/521XXXXXXXXXX?text=Hola,%20me%20gustar%C3%ADa%20agendar%20una%20cita%20en%20B%26G%20Animal%20Care" target="_blank" rel="noopener" class="btn btn-primary">
-					Agendar Cita
-				</a>
-			</div>
-		</nav>
-	</header>
+                        <ul class="caracteristicas list-unstyled">
+                            <li>
+                                <span class="caracteristica-icono"><i class="fa-solid fa-hand-holding-heart"></i></span>
+                                <span class="caracteristica-texto">Atención <br>personalizada</span>
+                            </li>
+                            <li>
+                                <span class="caracteristica-icono"><i class="fa-solid fa-shield-halved"></i></span>
+                                <span class="caracteristica-texto">Profesionales <br>comprometidos</span>
+                            </li>
+                            <li>
+                                <span class="caracteristica-icono"><i class="fa-solid fa-stethoscope"></i></span>
+                                <span class="caracteristica-texto">Tecnología <br>avanzada</span>
+                            </li>
+                            <li>
+                                <span class="caracteristica-icono"><i class="fa-solid fa-paw"></i></span>
+                                <span class="caracteristica-texto">Bienestar <br>animal</span>
+                            </li>
+                        </ul>
+                        <a href="#servicios" class="btn boton-vet boton-vet-grand">Conoce nuestros servicios</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="portada-imagen-caja">
+                            <img src="img/portada-mascotas.png" alt="Mascotas atendidas en B&G" class="portada-imagen">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-	<main>
-		<!-- Hero Section -->
-		<section class="hero" id="inicio">
-			<div class="container hero-grid">
-				<div>
-					<div class="badge">
-						<span class="badge-dot"></span>
-						Atención profesional y cercana
-					</div>
-					<h1>Atención médica con amor para <span>quienes más quieres.</span></h1>
-					<p class="hero-desc">
-						Especialistas en medicina preventiva, cirugía, diagnósticos y bienestar para tus mascotas. Aseguramos su salud con tecnología de vanguardia y calidez humana.
-					</p>
-					<div class="hero-actions">
-						<a href="https://wa.me/521XXXXXXXXXX?text=Hola,%20solicito%20informes%20veterinarios" target="_blank" rel="noopener" class="btn btn-primary">
-							Agendar Consulta Vía WhatsApp
-						</a>
-						<a href="#servicios" class="btn btn-secondary">
-							Ver Servicios
-						</a>
-					</div>
-				</div>
+        <!-- ================= SERVICIOS ================= -->
+        <section class="seccion-padding" id="servicios">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="badge-subtitulo">Lo que ofrecemos</span>
+                    <h2 class="seccion-titulo">Servicios Médicos Veterinarios</h2>
+                    <p class="seccion-descripcion">Atención clínica de primer nivel adaptada a las necesidades de tu perro o gato.</p>
+                </div>
 
-				<div class="hero-visual">
-					<div class="hero-card-base">
-						<svg class="main-pet" viewBox="0 0 24 24">
-							<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" style="display:none;"/>
-							<path d="M4.5 10.5C3.67 10.5 3 11.17 3 12s.67 1.5 1.5 1.5S6 12.83 6 12s-.67-1.5-1.5-1.5zm15 0c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zM12 4.5C9.5 4.5 7.5 6.5 7.5 9c0 1.25.5 2.38 1.32 3.19C7.62 13.06 7 14.44 7 16c0 2.76 2.24 5 5 5s5-2.24 5-5c0-1.56-.62-2.94-1.82-3.81.82-.81 1.32-1.94 1.32-3.19 0-2.5-2-4.5-4.5-4.5z"/>
-						</svg>
-					</div>
-					<div class="floating-pill pill-1">
-						<div class="pill-icon">❤️</div>
-						<div>
-							<div>Salud Garantizada</div>
-							<small style="color:var(--text-muted);font-weight:500;">Historial y seguimiento</small>
-						</div>
-					</div>
-					<div class="floating-pill pill-2">
-						<div class="pill-icon">⭐</div>
-						<div>
-							<div>Servicio 5 Estrellas</div>
-							<small style="color:var(--text-muted);font-weight:500;">Atención de calidad</small>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="tarjeta-servicio">
+                            <div class="icono-servicio"><i class="fa-solid fa-notes-medical"></i></div>
+                            <h3>Consulta General</h3>
+                            <p>Evaluación médica, diagnóstico preventivo, seguimiento de tratamientos y expedientes clínicos digitales.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="tarjeta-servicio">
+                            <div class="icono-servicio"><i class="fa-solid fa-syringe"></i></div>
+                            <h3>Vacunación y Desparasitación</h3>
+                            <p>Esquemas completos de inmunización para cachorros y adultos, junto a control de parásitos internos y externos.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="tarjeta-servicio">
+                            <div class="icono-servicio"><i class="fa-solid fa-kit-medical"></i></div>
+                            <h3>Cirugía y Quirófano</h3>
+                            <p>Esterilizaciones y cirugías de tejidos blandos bajo constante supervisión anestésica y monitoreo de signos vitales.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="tarjeta-servicio">
+                            <div class="icono-servicio"><i class="fa-solid fa-vial-virus"></i></div>
+                            <h3>Estudios de Laboratorio</h3>
+                            <p>Análisis clínicos y biometrías hemáticas para detectar oportunamente cualquier afección o patología.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="tarjeta-servicio">
+                            <div class="icono-servicio"><i class="fa-solid fa-pills"></i></div>
+                            <h3>Farmacia Especializada</h3>
+                            <p>Medicamentos avalados, antibióticos, analgésicos, suplementos y dietas médicas de prescripción.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="tarjeta-servicio">
+                            <div class="icono-servicio"><i class="fa-solid fa-shower"></i></div>
+                            <h3>Higiene y Estética</h3>
+                            <p>Baños terapéuticos, medicados y cuidados estéticos para asegurar la higiene dermatológica de tu compañero.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-		<!-- Catálogo de Servicios (Alineado a la propuesta) -->
-		<section class="services" id="servicios">
-			<div class="container">
-				<div class="section-header">
-					<div class="badge">Nuestros Servicios</div>
-					<h2>Cuidado Integral para tu Mascota</h2>
-					<p>Equipamiento moderno y médicos veterinarios dedicados a cada etapa del cuidado animal.</p>
-				</div>
-				<div class="services-grid">
-					<!-- Consulta -->
-					<div class="service-card">
-						<div class="service-icon">
-							<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-						</div>
-						<h3>Consulta Médica General</h3>
-						<p>Diagnósticos precisos, control de peso, nutrición clínica y chequeos periódicos con expediente médico digital.</p>
-					</div>
-					<!-- Vacunas -->
-					<div class="service-card">
-						<div class="service-icon">
-							<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 2 4 4-14 14H4v-4L18 2z"/><path d="m14 6 4 4"/></svg>
-						</div>
-						<h3>Vacunación y Desparasitación</h3>
-						<p>Esquemas de vacunación completos para cachorros y adultos, además de control interno y externo de parásitos.</p>
-					</div>
-					<!-- Cirugía -->
-					<div class="service-card">
-						<div class="service-icon">
-							<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg>
-						</div>
-						<h3>Cirugías y Quirófano</h3>
-						<p>Procedimientos quirúrgicos con monitoreo constante de signos vitales, esterilizaciones y cirugías de tejidos blandos.</p>
-					</div>
-					<!-- Estudios -->
-					<div class="service-card">
-						<div class="service-icon">
-							<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-						</div>
-						<h3>Estudios de Laboratorio</h3>
-						<p>Análisis clínicos, biometrías hemáticas y estudios especializados para diagnósticos oportunos y exactos.</p>
-					</div>
-					<!-- Farmacia -->
-					<div class="service-card">
-						<div class="service-icon">
-							<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
-						</div>
-						<h3>Farmacia Especializada</h3>
-						<p>Venta de medicamentos certificados, suplementos vitamínicos, insumos y dietas médicas de prescripción.</p>
-					</div>
-					<!-- Estética / Higiene -->
-					<div class="service-card">
-						<div class="service-icon">
-							<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-						</div>
-						<h3>Higiene y Estética Canina</h3>
-						<p>Baños medicados, cortes según la raza y tratamientos dermatológicos para mantener limpio y sano su pelaje.</p>
-					</div>
-				</div>
-			</div>
-		</section>
+        <!-- ================= NOSOTROS ================= -->
+        <section class="seccion-nosotros" id="nosotros">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <div class="tarjeta-nosotros-box p-4 p-md-5">
+                            <span class="badge-subtitulo">Sobre B&amp;G</span>
+                            <h2 class="seccion-titulo text-start mb-3">Vocación por el Cuidado y la Salud Animal</h2>
+                            <p class="text-muted">
+                                En <strong>B&amp;G Animal Care</strong> combinamos tecnología diagnóstica con trato compasivo. Sabemos que cada paciente es parte de una familia, por lo que cada tratamiento se diseña con transparencia, respeto y seguimiento constante.
+                            </p>
+                            <ul class="list-unstyled d-grid gap-3 mt-4 mb-4">
+                                <li class="d-flex align-items-center gap-3">
+                                    <i class="fa-solid fa-circle-check text-primary fs-5"></i>
+                                    <span>Seguimiento y control de historial médico.</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-3">
+                                    <i class="fa-solid fa-circle-check text-primary fs-5"></i>
+                                    <span>Material e instalaciones quirúrgicas con altos estándares.</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-3">
+                                    <i class="fa-solid fa-circle-check text-primary fs-5"></i>
+                                    <span>Recordatorios directos vía WhatsApp para sus próximas consultas.</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="btn boton-vet boton-vet-peq">Visítanos hoy</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="tarjeta-urgencia p-4 p-md-5 text-white">
+                            <i class="fa-solid fa-truck-medical fs-1 mb-3"></i>
+                            <h3 class="fw-bold mb-3">¿Tu mascota presenta una urgencia?</h3>
+                            <p class="mb-4 text-white-50">Llámanos inmediatamente para orientarte y tener listo el equipo clínico a tu arribo.</p>
+                            <a href="tel:+5214691267790" class="btn btn-light rounded-pill px-4 py-3 fw-bold text-dark">
+                                <i class="bi bi-telephone-fill me-2 text-danger"></i> Llamar al médico de guardia
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-		<!-- Nosotros / Calidad -->
-		<section class="about" id="nosotros">
-			<div class="container about-grid">
-				<div class="about-box">
-					<div class="badge">Compromiso B&amp;G</div>
-					<h2>Médicos Veterinarios de Confianza</h2>
-					<p style="color:var(--text-muted); margin-bottom: 20px;">
-						En B&amp;G Animal Care entendemos que los animales no son solo mascotas, sino miembros indispensables de la familia. Nuestro enfoque médico combina empatía con rigor científico.
-					</p>
-					<ul class="checklist">
-						<li class="checklist-item"><span class="checklist-icon">✓</span> Expediente clínico digital y seguimiento continuo</li>
-						<li class="checklist-item"><span class="checklist-icon">✓</span> Instalaciones y material quirúrgico esterilizado</li>
-						<li class="checklist-item"><span class="checklist-icon">✓</span> Recordatorios directos vía WhatsApp</li>
-					</ul>
-					<a href="https://wa.me/521XXXXXXXXXX?text=Hola,%20deseo%20saber%20m%C3%A1s%20de%20la%20cl%C3%ADnica" target="_blank" rel="noopener" class="btn btn-primary">
-						Contáctanos Directamente
-					</a>
-				</div>
-				<div>
-					<div style="background:var(--primary-dark); padding:40px; border-radius:28px; color:#fff; box-shadow:var(--shadow-lg);">
-						<h3 style="font-size:1.6rem; margin-bottom:14px;">¿Tienes una Urgencia Médica?</h3>
-						<p style="color:#cbd5e1; margin-bottom:24px;">Contáctanos de inmediato para preparar el área de recepción y consulta antes de tu llegada.</p>
-						<a href="tel:+52XXXXXXXXXX" class="btn btn-secondary" style="background:#fff; color:var(--primary-dark); font-weight:800;">
-							Llamar a Urgencias Ahora
-						</a>
-					</div>
-				</div>
-			</div>
-		</section>
+        <!-- ================= CONTACTO Y UBICACIÓN ================= -->
+        <section class="seccion-padding" id="contacto">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="badge-subtitulo">Ubicación y Horarios</span>
+                    <h2 class="seccion-titulo">Visítanos en Nuestra Clínica</h2>
+                    <p class="seccion-descripcion">Estamos ubicados convenientemente para atenderte con o sin cita previa.</p>
+                </div>
 
-		<!-- Ubicación, Horarios y Mapa -->
-		<section class="contact" id="contacto">
-			<div class="container">
-				<div class="section-header">
-					<div class="badge">Visítanos</div>
-					<h2>Ubicación y Horarios</h2>
-					<p>Estamos listos para recibirte en nuestras instalaciones.</p>
-				</div>
-				<div class="contact-grid">
-					<div class="contact-details">
-						<div class="contact-card">
-							<div class="contact-card-icon">📍</div>
-							<div>
-								<h4>Dirección</h4>
-								<p>Veterinaria B&amp;G Animal Care, Pénjamo, Gto.</p>
-							</div>
-						</div>
-						<div class="contact-card">
-							<div class="contact-card-icon">🕒</div>
-							<div>
-								<h4>Horario de Atención</h4>
-								<p>Lunes 11:00 AM – 8:00 PM<br> Miercoles a Viernes: 11:00 AM – 8:00 PM<br> Sábados: 11:00 AM – 5:00 PM<br> Domingo: 12:00 PM – 5:00 PM </p>
-							</div>
-						</div>
-						<div class="contact-card">
-							<div class="contact-card-icon">💬</div>
-							<div>
-								<h4>WhatsApp y Citas</h4>
-								<p>+52 (XXX) XXX-XXXX </p>
-							</div>
-						</div>
-					</div>
+                <div class="row g-4 align-items-stretch">
+                    <div class="col-lg-5">
+                        <div class="d-flex flex-column gap-3 h-100 justify-content-between">
+                            <div class="tarjeta-contacto">
+                                <div class="contacto-icono"><i class="fa-solid fa-location-dot"></i></div>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Dirección</h5>
+                                    <p class="text-muted mb-0">Veterinaria B&amp;G Animal Care, Pénjamo, Guanajuato.</p>
+                                </div>
+                            </div>
+                            <div class="tarjeta-contacto">
+                                <div class="contacto-icono"><i class="fa-regular fa-clock"></i></div>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Horario de Atención</h5>
+                                    <p class="text-muted mb-0">Lunes, Miercoles a Viernes: 11:00 AM – 8:00 PM<br>Sábados: 11:00 AM – 5:00 PM<br>Domingos: 12:00 PM – 5:00 PM</p>
+                                </div>
+                            </div>
+                            <div class="tarjeta-contacto">
+                                <div class="contacto-icono"><i class="fa-brands fa-whatsapp"></i></div>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Atención por WhatsApp</h5>
+                                    <p class="text-muted mb-0">+52 (469) 132-3718 · Dudas y citas directas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-					<div class="map-container">
-						<!-- Reemplazar con el enlace iframe de Google Maps de la veterinaria -->
-						<iframe 
-							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d302.5188326194984!2d-101.7197271173672!3d20.431882770566872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842c13c632c0bea5%3A0xb654a2e99ffec23e!2sVeterinaria%20B%26G%20Animal%20Care!5e0!3m2!1ses-419!2smx!4v1794254444904!5m2!1ses-419!2smx" 
-							loading="lazy" 
-							referrerpolicy="no-referrer-when-downgrade">
-						</iframe>
-					</div>
-				</div>
-			</div>
-		</section>
-	</main>
+                    <!-- Mapa de Google Maps -->
+                    <div class="col-lg-7">
+                        <div class="mapa-caja h-100">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.806010793495!2d-101.72221982480512!3d20.432062681071983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842c13c632c0bea5%3A0xb654a2e99ffec23e!2sVeterinaria%20B%26G%20Animal%20Care!5e0!3m2!1ses-419!2smx!4v1794425595238!5m2!1ses-419!2smx"
+                                width="100%" 
+                                height="100%" 
+                                style="border:0; min-height: 350px;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-	<!-- Botón Flotante de WhatsApp -->
-	<a href="https://wa.me/521XXXXXXXXXX?text=Hola,%20me%20gustar%C3%ADa%20agendar%20una%20cita%20veterinaria" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Contactar por WhatsApp">
-		<svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor">
-			<path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24M8.53 7.33c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.19.87 2.34.99 2.5.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28s-1.44-.71-1.66-.79c-.22-.08-.38-.12-.54.12s-.62.79-.76.95c-.14.16-.28.18-.52.06s-1.01-.37-1.92-1.19c-.71-.63-1.19-1.42-1.33-1.66-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42s-.54-1.3-.74-1.78c-.2-.48-.4-.41-.54-.42l-.46-.01z"/>
-		</svg>
-	</a>
+    <!-- ================= FOOTER ================= -->
+    <footer class="pie-pagina text-white py-4">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-paw fs-4 text-info"></i>
+                <span class="fw-bold">B&amp;G Animal Care</span> · Bienestar para quienes más quieres.
+            </div>
+            <div class="text-center text-md-end text-white-50 small">
+                © <span id="anioActual"></span> B&amp;G Animal Care. Desarrollado por <strong>Dog's Computer TI</strong>.
+            </div>
+        </div>
+    </footer>
 
-	<!-- Modal de Acceso al Sistema -->
-	<div class="modal-backdrop" id="loginModal">
-		<div class="modal">
-			<div class="modal-header">
-				<h3 style="font-weight:800; font-size:1.25rem;">Acceso al Personal</h3>
-				<button class="modal-close" id="closeLogin">&times;</button>
-			</div>
-			<form action="#" method="POST" onsubmit="event.preventDefault(); alert('Conexión con el backend en desarrollo.');">
-				<div class="form-group">
-					<label for="email">Correo Institucional</label>
-					<input type="email" id="email" required placeholder="veterinario@bgvet.mx">
-				</div>
-				<div class="form-group">
-					<label for="password">Contraseña</label>
-					<input type="password" id="password" required placeholder="••••••••">
-				</div>
-				<button type="submit" class="btn btn-primary" style="width:100%; border-radius:12px; margin-top:8px;">
-					Ingresar al Sistema
-				</button>
-			</form>
-		</div>
-	</div>
+    <!-- ================= BOTÓN FLOTANTE WHATSAPP ================= -->
+    <a href="https://wa.me/5214691323718?text=Hola,%20solicito%20informaci%C3%B3n%20sobre%20sus%20servicios%20veterinarios" 
+       target="_blank" 
+       rel="noopener" 
+       class="btn-flotante-wsp" 
+       aria-label="Contactar por WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
-	<!-- Footer -->
-	<footer>
-		<div class="container footer-flex">
-			<div>
-				<strong>Veterinaria B&amp;G Animal Care</strong> · Salud integral y bienestar animal
-			</div>
-			<div>
-				© <span id="currentYear"></span> B&amp;G Animal Care. Desarrollado por Dog's Computer TI.
-			</div>
-		</div>
-	</footer>
+    <!-- ================= MODAL LOGIN SISTEMA ================= -->
+    <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalLoginLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 p-3">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold text-primary" id="modalLoginLabel">
+                        <i class="fa-solid fa-shield-cat me-2"></i>Acceso al Personal
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body pt-3">
+                    <p class="text-muted small mb-4">Ingresa con tus credenciales asignadas para administrar expedientes, inventario y citas.</p>
+                    <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Backend en desarrollo.');">
+                        <div class="mb-3">
+                            <label for="correo" class="form-label fw-semibold small">Correo Electrónico</label>
+                            <input type="email" class="form-control rounded-3 py-2" id="correo" required placeholder="personal@bgvet.mx">
+                        </div>
+                        <div class="mb-4">
+                            <label for="clave" class="form-label fw-semibold small">Contraseña</label>
+                            <input type="password" class="form-control rounded-3 py-2" id="clave" required placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn boton-vet w-100 justify-content-center py-2">
+                            Iniciar Sesión
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<!-- Scripts de Interacción -->
-	<script>
-		// Menú Móvil
-		const menuBtn = document.getElementById('menuBtn');
-		const navMenu = document.getElementById('navMenu');
-		menuBtn.addEventListener('click', () => {
-			navMenu.classList.toggle('active');
-		});
-
-		// Cerrar menú al hacer clic en un enlace
-		navMenu.querySelectorAll('a').forEach(link => {
-			link.addEventListener('click', () => navMenu.classList.remove('active'));
-		});
-
-		// Modal Acceso al Sistema
-		const openLogin = document.getElementById('openLogin');
-		const closeLogin = document.getElementById('closeLogin');
-		const loginModal = document.getElementById('loginModal');
-
-		openLogin.addEventListener('click', () => loginModal.classList.add('active'));
-		closeLogin.addEventListener('click', () => loginModal.classList.remove('active'));
-		loginModal.addEventListener('click', (e) => {
-			if (e.target === loginModal) loginModal.classList.remove('active');
-		});
-
-		// Año Dinámico
-		document.getElementById('currentYear').textContent = new Date().getFullYear();
-	</script>
+    <!-- Scripts de Bootstrap y lógica personalizada -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="landing_page.js"></script>
 </body>
 </html>

@@ -1,0 +1,25 @@
+# 1. Bloqueo total del listado de directorios
+Options -Indexes
+IndexIgnore *
+
+# 2. Archivo por defecto al entrar a la raíz
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Forzar HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Si alguien intenta entrar directo a una carpeta existente en el navegador (ej: tusitio.com/img/)
+    # lo redirige al inicio en lugar de mostrar error o el contenido
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^.+/?$ /index.html [R=301,L]
+
+    # Bloquear descarga de archivos del sistema o código fuente crítico
+    <FilesMatch "^(\.env|\.git|\.htaccess|\.htpasswd|composer\.(json|lock)|package\.(json|lock)|\.sql|\.log|\.md)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>

@@ -1,0 +1,306 @@
+:root{
+    --vet-azul-oscuro: #0b2a63;
+    --vet-azul: #0d5cb6;
+    --vet-azul-hover: #0a4a96;
+    --vet-fondo: #dce9f7;
+    --vet-fondo-claro: #eaf2fb;
+    --vet-texto: #10244d;
+}
+
+*{box-sizing: border-box;}
+
+body{
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    color: var(--vet-texto);
+    background: #fff;
+}
+
+/*-------------------------------------------------------HEADER / NAVBAR*/
+.encabezado{
+    background: #fff;
+    position: relative;
+    z-index: 10;
+}
+.encabezado .navbar{padding: 1rem 0;}
+
+.logo-icono{font-size: 3rem; color: var(--vet-azul);}
+
+.logo-texto{
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+    color: var(--vet-azul);
+}
+.logo-texto strong{font-size: 2rem; font-weight: 800; letter-spacing: -.5px;}
+.logo-texto small{font-size: .95rem; font-weight: 500; color: var(--vet-azul-oscuro);}
+
+.navbar .nav-link{
+    color: var(--vet-texto);
+    font-weight: 500;
+    font-size: 1.05rem;
+    position: relative;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link.active{color: var(--vet-azul);}
+
+/*???????????????????????????????????????????*/
+.navbar .nav-link.nav-link.active::after{
+    content: "";
+    position: absolute;
+    left: 50%; bottom: -6px;
+    width: 6px; height: 6px;
+    background: var(--vet-azul);
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+.navbar-toggler{border: 0; box-shadow: none !important;}
+
+/*----BOTONES---*/
+.boton-vet{
+    background: var(--vet-azul);
+    color: #fff;
+    border: 0;
+    border-radius: 999px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    box-shadow: 0 8px 20px rgba(13, 92, 182, .25);
+    transition: background .2s, transform .2s;
+}
+.boton-vet:hover{background: var(--vet-azul-hover); color: #fff; transform: translateY(-2px);}
+
+.boton-vet-peq{padding: .85rem 1.6rem; font-size: 1.05rem;}
+.boton-vet-grand{padding: 1.1rem 2.6rem; font-size: 1.35rem;}
+
+/*--------------------HERO------------------*/
+.portada{
+    background: linear-gradient(180deg, var(--vet-fondo) 0%, var(--vet-fondo-claro) 100%);
+    padding: 2rem 0 8rem;
+    position: relative;
+    overflow: hidden;
+}
+.portada::after{
+    content: "";
+    position: absolute;
+    left: -10%; right: -10%; bottom: -1px;
+    height: 110px;
+    background: #fff;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+.portada-titulo{
+    font-weight: 800;
+    font-size: clamp(2.4rem, 5.2vw, 4.4rem);
+    line-height: 1.12;
+    letter-spacing: -1.5px;
+    color: var(--vet-azul-oscuro);
+    margin-bottom: 1.8rem;
+}
+.portada-titulo .acento{color: var(--vet-azul); display: inline-block;}
+
+.corazon-decorativo{
+    font-size: .6em;
+    vertical-align: top;
+    margin-left: .15em;
+}
+.portada-texto{
+    font-size: clamp(1.05rem, 1.7vw, 1.5rem);
+    line-height: 1.45;
+    max-width: 520px;
+    margin-bottom: 2.2rem;
+}
+
+/*La 4 caracteristicas*/
+.caracteristicas{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem 1.6rem;
+    margin-bottom: 2.6rem;
+}
+.caracteristicas li{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 125px;
+}
+.caracteristica-icono{
+    width: 84px; height: 84px;
+    background: rgba(255, 255, 255, .85);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--vet-azul);
+    font-size: 2rem;
+    margin-bottom: .6rem;
+    box-shadow: 0 6px 16px rgba(13, 92, 182, .08);
+}
+.caracteristica-texto{font-size: 1rem; line-height: 1.25;}
+
+/*Imagen de portada*/
+.portada-imagen-caja{position: relative;}
+.portada-imagen{
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 90px 0 0 40% / 60px 0 0 30%;
+    box-shadow: 0 20px 50px rgba(13, 42, 99, .15);
+}
+
+
+/*------------------RESPONSIVO------------------------*/
+@media(max-width: 991.98px){
+    .encabezado .navbar{padding: 1rem 0;}
+    .logo-icono{font-size: 2.4rem;}
+    .logo-texto strong{font-size: 1.6rem;}
+    .navbar-collapse{padding-top: 1rem;}
+    .navbar .nav-link.active::after{display: none;}
+
+    .portada{padding: 3rem 0 6rem; text-align: center;}
+    .portada-texto{margin-left: auto; margin-right: auto;}
+    .caracteristicas{justify-content: center;}
+    .portada-imagen{border-radius: 40px;}
+}
+@media(max-width: 575.98px){
+    .encabezado .container,
+    .portada .container{padding-left: 1.5rem; padding-right: 1.5rem;}
+
+    .portada{padding: 3rem 0 6.5rem;}
+
+    .caracteristicas{
+        display: grid; 
+        grid-template-columns: repeat(2,1fr); 
+        gap: 1.4rem 1rem;
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .caracteristicas li{width: 100%;}
+    .boton-vet-grande{width: 100%; justify-content: center; font-size: 1.2rem;}
+    .portada::after{height: 70px;}
+}
+
+/*------------------ SECCIONES GENERALES ------------------*/
+.seccion-padding { padding: 5rem 0; }
+.badge-subtitulo {
+    display: inline-block;
+    background: var(--vet-fondo-claro);
+    color: var(--vet-azul);
+    font-weight: 700;
+    font-size: .85rem;
+    padding: .35rem 1rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: .8rem;
+}
+.seccion-titulo {
+    font-size: clamp(2rem, 3.2vw, 2.6rem);
+    font-weight: 800;
+    color: var(--vet-azul-oscuro);
+    letter-spacing: -.5px;
+}
+.seccion-descripcion {
+    color: #556987;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+}
+
+/*------------------ TARJETAS SERVICIOS ------------------*/
+.tarjeta-servicio {
+    background: #fff;
+    border: 1px solid #e2ecf8;
+    border-radius: 20px;
+    padding: 2.2rem 1.8rem;
+    height: 100%;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.tarjeta-servicio:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 35px rgba(11, 42, 99, .08);
+    border-color: var(--vet-azul);
+}
+.icono-servicio {
+    width: 62px; height: 62px;
+    border-radius: 16px;
+    background: var(--vet-fondo-claro);
+    color: var(--vet-azul);
+    display: grid;
+    place-items: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.4rem;
+    transition: background .25s, color .25s;
+}
+.tarjeta-servicio:hover .icono-servicio {
+    background: var(--vet-azul);
+    color: #fff;
+}
+.tarjeta-servicio h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--vet-azul-oscuro);
+    margin-bottom: .6rem;
+}
+.tarjeta-servicio p { color: #556987; font-size: .95rem; margin: 0; line-height: 1.5; }
+
+/*------------------ SECCIÓN NOSOTROS ------------------*/
+.seccion-nosotros { background: var(--vet-fondo-claro); padding: 5rem 0; }
+.tarjeta-nosotros-box {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 12px 30px rgba(11, 42, 99, .05);
+}
+.tarjeta-urgencia {
+    background: linear-gradient(135deg, var(--vet-azul-oscuro) 0%, var(--vet-azul) 100%);
+    border-radius: 24px;
+    box-shadow: 0 16px 36px rgba(11, 42, 99, .15);
+}
+
+/*------------------ CONTACTO Y MAPA ------------------*/
+.tarjeta-contacto {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    background: var(--vet-fondo-claro);
+    padding: 1.5rem;
+    border-radius: 18px;
+    border: 1px solid #d8e5f5;
+}
+.contacto-icono {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: #fff;
+    color: var(--vet-azul);
+    display: grid;
+    place-items: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+.mapa-caja {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #d8e5f5;
+    box-shadow: 0 8px 24px rgba(11, 42, 99, .06);
+}
+
+/*------------------ BOTÓN FLOTANTE WSP ------------------*/
+.btn-flotante-wsp {
+    position: fixed;
+    bottom: 25px; right: 25px;
+    width: 60px; height: 60px;
+    background: #25d366;
+    color: #fff;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 2rem;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, .4);
+    z-index: 999;
+    text-decoration: none;
+    transition: transform .25s ease;
+}
+.btn-flotante-wsp:hover { transform: scale(1.1); color: #fff; }
+
+/*------------------ PIE DE PÁGINA ------------------*/
+.pie-pagina { background: var(--vet-azul-oscuro); }
