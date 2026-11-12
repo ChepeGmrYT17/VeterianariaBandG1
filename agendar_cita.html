@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agendar Cita | B&amp;G Animal Care</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="citas.css">
+</head>
+<body data-modo="cliente">
+
+    <!-- Navbar Superior -->
+    <header class="client-header sticky-top">
+        <div class="container d-flex flex-wrap align-items-center justify-content-between gap-3">
+            <a href="index.html" class="d-flex align-items-center gap-2 text-decoration-none">
+                <div class="rounded-3 bg-primary text-white d-grid" style="width:44px;height:44px;place-items:center;">
+                    <i class="fa-solid fa-paw fs-5"></i>
+                </div>
+                <div style="line-height:1.1;">
+                    <strong class="fs-5 text-primary d-block">B&amp;G Animal Care</strong>
+                    <small class="text-muted fw-semibold">Reserva de Citas en Línea</small>
+                </div>
+            </a>
+
+            <div class="d-flex align-items-center gap-2">
+                <a href="index.html" class="btn btn-outline-secondary rounded-pill px-3 fw-semibold">
+                    <i class="bi bi-arrow-left me-1"></i> Volver al inicio
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container py-4 py-md-5">
+        <!-- Encabezado -->
+        <div class="row align-items-center mb-4 g-3">
+            <div class="col-lg-8">
+                <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 fw-bold mb-2">
+                    <i class="bi bi-calendar2-check me-1"></i> Agenda en Tiempo Real
+                </span>
+                <h1 class="fw-extrabold mb-1" style="color: var(--vet-azul-oscuro); font-weight:800;">
+                    Selecciona el día de tu consulta
+                </h1>
+                <p class="text-muted mb-0">
+                    Haz clic sobre cualquier día disponible en el calendario para elegir tu horario y registrar a tu mascota.
+                </p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <div class="p-3 bg-white rounded-4 border shadow-sm text-start">
+                    <div class="fw-bold small text-primary mb-1"><i class="bi bi-clock-history me-1"></i> Horarios de Atención</div>
+                    <div class="small text-muted" style="line-height:1.45;">
+                        <strong>Lun, Mié, Jue y Vie:</strong> 11:00 AM – 8:00 PM<br>
+                        <strong>Sábados:</strong> 11:00 AM – 5:00 PM<br>
+                        <strong>Domingos:</strong> 12:00 PM – 5:00 PM<br>
+                        <span class="text-danger fw-bold">Martes: Cerrado</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta del Calendario -->
+        <div class="calendar-card">
+            <div class="calendar-toolbar">
+                <h2 class="calendar-month-title" id="tituloMes">
+                    <i class="bi bi-calendar3 text-primary"></i>
+                    <span id="nombreMesAnio">Noviembre 2026</span>
+                </h2>
+                <div class="d-flex align-items-center gap-2">
+                    <button type="button" class="btn-cal-nav" id="btnMesAnterior">← Mes Anterior</button>
+                    <button type="button" class="btn-cal-nav" id="btnHoy">Hoy</button>
+                    <button type="button" class="btn-cal-nav" id="btnMesSiguiente">Mes Siguiente →</button>
+                </div>
+            </div>
+
+            <!-- Leyenda de colores -->
+            <div class="leyenda-colores">
+                <span class="leyenda-item"><span class="leyenda-dot" style="background:#ffffff;"></span> Totalmente disponible</span>
+                <span class="leyenda-item"><span class="leyenda-dot" style="background:#dcfce7;"></span> Alta disponibilidad</span>
+                <span class="leyenda-item"><span class="leyenda-dot" style="background:#fef08a;"></span> Disponibilidad media</span>
+                <span class="leyenda-item"><span class="leyenda-dot" style="background:#fed7aa;"></span> Últimos horarios</span>
+                <span class="leyenda-item"><span class="leyenda-dot" style="background:#fecaca;"></span> Sin horarios / Martes cerrado</span>
+            </div>
+
+            <!-- Grid del calendario -->
+            <div class="calendar-grid" id="calendarioGrid"></div>
+        </div>
+    </main>
+
+    <!-- ================= MODAL FORMULARIO DE REGISTRO DE CITA ================= -->
+    <div class="modal fade" id="modalFormularioCita" tabindex="-1" aria-labelledby="tituloModalCita" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pb-0 pt-4 px-4">
+                    <div>
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-1 mb-1">Nueva Cita Veterinaria</span>
+                        <h4 class="modal-title fw-bold" id="tituloModalCita" style="color: var(--vet-azul-oscuro);">
+                            Agendar para el <span id="fechaSeleccionadaTexto" class="text-primary"></span>
+                        </h4>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <form id="formNuevaCita" class="modal-body p-4">
+                    <input type="hidden" id="inputFechaCita" name="fecha">
+
+                    <div class="row g-3">
+                        <!-- 1. Especie de la mascota -->
+                        <div class="col-md-6">
+                            <label for="especieMascota" class="form-label fw-semibold">
+                                <i class="fa-solid fa-paw text-primary me-1"></i> Especie de la mascota *
+                            </label>
+                            <select class="form-select rounded-3 py-2" id="especieMascota" required>
+                                <option value="" selected disabled>Selecciona una especie...</option>
+                                <option value="Perro">Perro</option>
+                                <option value="Gato">Gato</option>
+                                <option value="Conejo">Conejo</option>
+                                <option value="Ave">Ave</option>
+                                <option value="Hámster / Roedor">Hámster / Roedor</option>
+                                <option value="Reptil / Tortuga">Reptil / Tortuga</option>
+                                <option value="Otra especie">Otra especie</option>
+                            </select>
+                        </div>
+
+                        <!-- 2. Nombre de la mascota -->
+                        <div class="col-md-6">
+                            <label for="nombreMascota" class="form-label fw-semibold">
+                                <i class="fa-solid fa-tag text-primary me-1"></i> Nombre de la mascota *
+                            </label>
+                            <input type="text" class="form-control rounded-3 py-2" id="nombreMascota" required placeholder="Ej. Max, Luna, Rocky">
+                        </div>
+
+                        <!-- 3. Motivo de la consulta -->
+                        <div class="col-12">
+                            <label for="motivoConsulta" class="form-label fw-semibold">
+                                <i class="fa-solid fa-stethoscope text-primary me-1"></i> Motivo de la consulta *
+                            </label>
+                            <input type="text" class="form-control rounded-3 py-2" id="motivoConsulta" required placeholder="Ej. Consulta general, vacunación, revisión de piel, desparasitación...">
+                        </div>
+
+                        <!-- 4. Nombre del propietario -->
+                        <div class="col-md-6">
+                            <label for="nombrePropietario" class="form-label fw-semibold">
+                                <i class="fa-solid fa-user text-primary me-1"></i> Nombre del propietario *
+                            </label>
+                            <input type="text" class="form-control rounded-3 py-2" id="nombrePropietario" required placeholder="Nombre completo">
+                        </div>
+
+                        <!-- 5. Número de teléfono -->
+                        <div class="col-md-6">
+                            <label for="telefonoPropietario" class="form-label fw-semibold">
+                                <i class="fa-brands fa-whatsapp text-success me-1"></i> Número de teléfono (WhatsApp) *
+                            </label>
+                            <input type="tel" class="form-control rounded-3 py-2" id="telefonoPropietario" required pattern="[0-9]{10}" maxlength="10" placeholder="10 dígitos (Ej. 4621234567)">
+                            <div class="form-text">Lo usaremos para enviarte confirmación por WhatsApp.</div>
+                        </div>
+
+                        <!-- 6. Hora de la cita (cada 20 minutos, solo disponibles) -->
+                        <div class="col-12">
+                            <label for="horaCita" class="form-label fw-semibold">
+                                <i class="fa-regular fa-clock text-primary me-1"></i> Hora de la cita (Horarios disponibles) *
+                            </label>
+                            <select class="form-select rounded-3 py-2 border-primary" id="horaCita" required>
+                                <option value="" selected disabled>Selecciona un horario disponible...</option>
+                            </select>
+                            <div class="form-text text-primary fw-semibold" id="infoHorariosDisponibles"></div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2 mt-4 pt-2 border-top">
+                        <button type="button" class="btn btn-light rounded-pill px-4 fw-semibold" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn boton-vet px-4">
+                            <i class="bi bi-check2-circle"></i> Confirmar Cita
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL DE COMPROBANTE EXITOSO ================= -->
+    <div class="modal fade" id="modalComprobante" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 text-center p-4">
+                <div class="mx-auto mb-3 rounded-circle bg-success-subtle text-success d-grid" style="width:68px;height:68px;place-items:center;font-size:2rem;">
+                    <i class="bi bi-check-lg"></i>
+                </div>
+                <h4 class="fw-bold mb-2" style="color: var(--vet-azul-oscuro);">¡Cita Registrada con Éxito!</h4>
+                <p class="text-muted small mb-3">
+                    Hemos apartado tu horario. Nuestro equipo se comunicará a tu WhatsApp para confirmar tu asistencia.
+                </p>
+                <div class="bg-light rounded-3 p-3 text-start small mb-4" id="resumenComprobante"></div>
+                <button type="button" class="btn boton-vet w-100 justify-content-center" data-bs-dismiss="modal">
+                    Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="citas.js"></script>
+</body>
+</html>

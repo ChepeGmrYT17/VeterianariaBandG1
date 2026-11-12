@@ -48,10 +48,10 @@
                         <div class="d-flex align-items-center justify-content-center gap-2 mt-3 mt-lg-0">
                             <!-- Botón Acceso al Sistema -->
                             <button type="button" class="btn btn-outline-primary rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#modalLogin">
-                                <i class="fa-solid fa-right-to-bracket me-1"></i> Sistema
+                                <i class="fa-solid fa-right-to-bracket me-1"></i> Ingresar
                             </button>
-                            <!-- Botón Agendar Cita -->
-                            <a href="https://wa.me/5214691323718?text=Hola,%20me%20gustar%C3%ADa%20agendar%20una%20cita%20veterinaria" target="_blank" rel="noopener" class="btn boton-vet boton-vet-peq">
+                            <!-- Botón Agendar Cita -> Redirige a agendar_cita.html -->
+                            <a href="agendar_cita.html" class="btn boton-vet boton-vet-peq">
                                 <i class="bi bi-calendar3"></i> Agendar cita
                             </a>
                         </div>
@@ -94,7 +94,11 @@
                                 <span class="caracteristica-texto">Bienestar <br>animal</span>
                             </li>
                         </ul>
-                        <a href="#servicios" class="btn boton-vet boton-vet-grand">Conoce nuestros servicios</a>
+                        <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                            <a href="agendar_cita.html" class="btn boton-vet boton-vet-grand">
+                                <i class="bi bi-calendar-plus"></i> Agendar cita ahora
+                            </a>
+                        </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="portada-imagen-caja">
@@ -186,7 +190,7 @@
                                     <span>Recordatorios directos vía WhatsApp para sus próximas consultas.</span>
                                 </li>
                             </ul>
-                            <a href="#contacto" class="btn boton-vet boton-vet-peq">Visítanos hoy</a>
+                            <a href="agendar_cita.html" class="btn boton-vet boton-vet-peq">Agendar consulta</a>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -194,7 +198,7 @@
                             <i class="fa-solid fa-truck-medical fs-1 mb-3"></i>
                             <h3 class="fw-bold mb-3">¿Tu mascota presenta una urgencia?</h3>
                             <p class="mb-4 text-white-50">Llámanos inmediatamente para orientarte y tener listo el equipo clínico a tu arribo.</p>
-                            <a href="tel:+5214691267790" class="btn btn-light rounded-pill px-4 py-3 fw-bold text-dark">
+                            <a href="tel:+521XXXXXXXXXX" class="btn btn-light rounded-pill px-4 py-3 fw-bold text-dark">
                                 <i class="bi bi-telephone-fill me-2 text-danger"></i> Llamar al médico de guardia
                             </a>
                         </div>
@@ -209,7 +213,7 @@
                 <div class="text-center mb-5">
                     <span class="badge-subtitulo">Ubicación y Horarios</span>
                     <h2 class="seccion-titulo">Visítanos en Nuestra Clínica</h2>
-                    <p class="seccion-descripcion">Estamos ubicados convenientemente para atenderte con o sin cita previa.</p>
+                    <p class="seccion-descripcion">Estamos ubicados convenientemente para atenderte con cita previa.</p>
                 </div>
 
                 <div class="row g-4 align-items-stretch">
@@ -219,21 +223,25 @@
                                 <div class="contacto-icono"><i class="fa-solid fa-location-dot"></i></div>
                                 <div>
                                     <h5 class="fw-bold mb-1">Dirección</h5>
-                                    <p class="text-muted mb-0">Veterinaria B&amp;G Animal Care, Pénjamo, Guanajuato.</p>
+                                    <p class="text-muted mb-0">Veterinaria B&amp;G Animal Care, Guanajuato, México.</p>
                                 </div>
                             </div>
                             <div class="tarjeta-contacto">
                                 <div class="contacto-icono"><i class="fa-regular fa-clock"></i></div>
                                 <div>
                                     <h5 class="fw-bold mb-1">Horario de Atención</h5>
-                                    <p class="text-muted mb-0">Lunes, Miercoles a Viernes: 11:00 AM – 8:00 PM<br>Sábados: 11:00 AM – 5:00 PM<br>Domingos: 12:00 PM – 5:00 PM</p>
+                                    <p class="text-muted mb-0">
+                                        Lun, Mié, Jue y Vie: 11:00 AM – 8:00 PM<br>
+                                        Sábados: 11:00 AM – 5:00 PM | Domingos: 12:00 PM – 5:00 PM<br>
+                                        <span class="text-danger fw-semibold">Martes: Cerrado</span>
+                                    </p>
                                 </div>
                             </div>
                             <div class="tarjeta-contacto">
                                 <div class="contacto-icono"><i class="fa-brands fa-whatsapp"></i></div>
                                 <div>
                                     <h5 class="fw-bold mb-1">Atención por WhatsApp</h5>
-                                    <p class="text-muted mb-0">+52 (469) 132-3718 · Dudas y citas directas</p>
+                                    <p class="text-muted mb-0">+52 (XXX) XXX-XXXX · Dudas y confirmación de citas</p>
                                 </div>
                             </div>
                         </div>
@@ -243,7 +251,7 @@
                     <div class="col-lg-7">
                         <div class="mapa-caja h-100">
                             <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.806010793495!2d-101.72221982480512!3d20.432062681071983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842c13c632c0bea5%3A0xb654a2e99ffec23e!2sVeterinaria%20B%26G%20Animal%20Care!5e0!3m2!1ses-419!2smx!4v1794425595238!5m2!1ses-419!2smx"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119565.67923483256!2d-101.5947702!3d20.4497678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842c13d8d69f0001%3A0xa19c72f7786cefc!2sP%C3%A9njamo%2C%20Gto.!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx"
                                 width="100%" 
                                 height="100%" 
                                 style="border:0; min-height: 350px;" 
@@ -272,7 +280,7 @@
     </footer>
 
     <!-- ================= BOTÓN FLOTANTE WHATSAPP ================= -->
-    <a href="https://wa.me/5214691323718?text=Hola,%20solicito%20informaci%C3%B3n%20sobre%20sus%20servicios%20veterinarios" 
+    <a href="https://wa.me/521XXXXXXXXXX?text=Hola,%20solicito%20informaci%C3%B3n%20sobre%20sus%20servicios%20veterinarios" 
        target="_blank" 
        rel="noopener" 
        class="btn-flotante-wsp" 
@@ -291,8 +299,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body pt-3">
-                    <p class="text-muted small mb-4">Ingresa con tus credenciales asignadas para administrar expedientes, inventario y citas.</p>
-                    <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Backend en desarrollo.');">
+                    <p class="text-muted small mb-4">Ingresa con tus credenciales asignadas para administrar citas, expedientes e inventario.</p>
+                    <form action="admin_citas.html" method="GET">
                         <div class="mb-3">
                             <label for="correo" class="form-label fw-semibold small">Correo Electrónico</label>
                             <input type="email" class="form-control rounded-3 py-2" id="correo" required placeholder="personal@bgvet.mx">
